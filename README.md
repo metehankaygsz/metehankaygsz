@@ -20,24 +20,24 @@
 | Metric | Total |
 | --- | ---: |
 | Public repositories | **9** |
-| Original public projects | **7** |
+| Original public projects | **6** |
 | Followers | **9** |
 | Stars on original repositories | **2** |
-| Contributions in the last 12 months | **40** |
+| Contributions in the last 12 months | **47** |
 
 ## Languages
 
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-37.4%25-3776AB?style=flat-square&amp;logo=python" alt="Python 37.4%" />
-  <img src="https://img.shields.io/badge/C%23-22.3%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 22.3%" />
-  <img src="https://img.shields.io/badge/TypeScript-15.6%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 15.6%" />
-  <img src="https://img.shields.io/badge/HTML-15.2%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 15.2%" />
-  <img src="https://img.shields.io/badge/C%2B%2B-2.7%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.7%" />
-  <img src="https://img.shields.io/badge/CSS-2.2%25-663399?style=flat-square&amp;logo=css" alt="CSS 2.2%" />
-  <img src="https://img.shields.io/badge/Assembly-2.1%25-6E4C13?style=flat-square" alt="Assembly 2.1%" />
-  <img src="https://img.shields.io/badge/C-1.3%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.3%" />
+  <img src="https://img.shields.io/badge/Python-39.3%25-3776AB?style=flat-square&amp;logo=python" alt="Python 39.3%" />
+  <img src="https://img.shields.io/badge/C%23-20.9%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 20.9%" />
+  <img src="https://img.shields.io/badge/TypeScript-16.4%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 16.4%" />
+  <img src="https://img.shields.io/badge/HTML-14.2%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 14.2%" />
+  <img src="https://img.shields.io/badge/C%2B%2B-2.9%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.9%" />
+  <img src="https://img.shields.io/badge/Assembly-2.2%25-6E4C13?style=flat-square" alt="Assembly 2.2%" />
+  <img src="https://img.shields.io/badge/CSS-1.5%25-663399?style=flat-square&amp;logo=css" alt="CSS 1.5%" />
+  <img src="https://img.shields.io/badge/C-1.4%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.4%" />
   <img src="https://img.shields.io/badge/Makefile-1.2%25-427819?style=flat-square&amp;logo=gnu" alt="Makefile 1.2%" />
   <img src="https://img.shields.io/badge/JavaScript-%3C0.1%25-F7DF1E?style=flat-square&amp;logo=javascript&amp;logoColor=black" alt="JavaScript &lt;0.1%" />
 </p>
@@ -83,8 +83,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
-- **Jun 9, 2026:** Pushed updates to [metehankaygsz/metehankaygsz](https://github.com/metehankaygsz/metehankaygsz)
-- **Jun 9, 2026:** Created branch `main` in [metehankaygsz/metehankaygsz](https://github.com/metehankaygsz/metehankaygsz)
-- **Jun 9, 2026:** Merged [pull request #4](https://github.com/MISDataGit/MISdata/pull/4) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Merged [pull request #6](https://github.com/MISDataGit/MISdata/pull/6) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Opened [pull request #6](https://github.com/MISDataGit/MISdata/pull/6) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Created branch `fix/change-period-reaggregation` in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Opened [pull request #4](https://github.com/MISDataGit/MISdata/pull/4) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Opened [pull request #5](https://github.com/410979729/scope-recall/pull/5) in [410979729/scope-recall](https://github.com/410979729/scope-recall)
