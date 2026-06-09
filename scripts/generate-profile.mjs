@@ -629,34 +629,30 @@ function buildReadme({
   achievements,
   activity,
 }) {
-  const topLanguageNames = languages.slice(0, 3).map((language) => language.name);
-  const taglineText = profile.bio
-    ? cleanMarkdownText(profile.bio)
-    : topLanguageNames.length
-      ? `Building public projects across ${formatJoinedList(topLanguageNames)}.`
-      : "Building practical software and learning in public.";
-  const tagline = escapeHtml(taglineText);
   const displayName = escapeHtml(profile.name || profile.login);
+
+  const profileBadges = [
+    `<a href="https://github.com/${username}?tab=followers"><img src="https://img.shields.io/github/followers/${username}?style=flat-square&label=Followers&color=0969da" alt="GitHub followers" /></a>`,
+    `<a href="https://github.com/${username}?tab=repositories"><img src="https://img.shields.io/github/stars/${username}?affiliations=OWNER&style=flat-square&label=Stars&color=0969da" alt="GitHub stars" /></a>`,
+  ];
+
+  // Add location badge
+  if (profile.location) {
+    profileBadges.push(
+      image(
+        shieldBadge(profile.location, "", "flat-square", { color: "E30A17" }),
+        `Based in ${profile.location}`,
+      ),
+    );
+  }
+
+  // Add GitHub since badge
   const joinedDate = new Intl.DateTimeFormat("en", {
     month: "short",
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(profile.created_at));
-  const location = profile.location || "GitHub";
-
-  const profileBadges = [
-    `<a href="https://github.com/${username}?tab=followers">${image(
-      `https://img.shields.io/github/followers/${username}?style=flat-square&label=Followers&color=0969da`,
-      "GitHub followers",
-    )}</a>`,
-    `<a href="https://github.com/${username}?tab=repositories">${image(
-      `https://img.shields.io/github/stars/${username}?affiliations=OWNER&style=flat-square&label=Stars&color=0969da`,
-      "GitHub stars",
-    )}</a>`,
-    image(
-      shieldBadge(location, "", "flat-square", { color: "E30A17" }),
-      `Based in ${location}`,
-    ),
+  profileBadges.push(
     image(
       shieldBadge("GitHub since", joinedDate, "flat-square", {
         color: "181717",
@@ -664,9 +660,9 @@ function buildReadme({
       }),
       `GitHub member since ${joinedDate}`,
     ),
-  ];
+  );
 
-  const languageBadges = languages.slice(0, 12).map(languageBadge);
+  const languageBadges = languages.slice(0, 10).map(languageBadge);
   const technologyBadges = technologies.map(technologyBadge);
 
   return `<!--
@@ -675,13 +671,8 @@ function buildReadme({
 -->
 
 <div align="center">
-  <a href="${profile.html_url}">
-    <img src="${escapeHtml(profile.avatar_url)}" width="112" alt="${displayName}" />
-  </a>
 
   <h1>${displayName}</h1>
-
-  <p><strong>${tagline}</strong></p>
 
   <p>
     ${profileBadges.join("\n    ")}
@@ -698,7 +689,7 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ${renderBadges(languageBadges)}
 
-## Detected Toolkit
+## Toolkits
 
 ${
   technologyBadges.length > 0
