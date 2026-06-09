@@ -4,9 +4,13 @@
 -->
 
 <div align="center">
+  <a href="https://github.com/metehankaygsz">
+    <img src="https://avatars.githubusercontent.com/u/64954684?v=4" width="112" alt="Metehan Kaygısız" />
+  </a>
 
   <h1>Metehan Kaygısız</h1>
 
+  <p><strong>Building public projects across Python, C#, and TypeScript.</strong></p>
 
   <p>
     <a href="https://github.com/metehankaygsz?tab=followers"><img src="https://img.shields.io/github/followers/metehankaygsz?style=flat-square&amp;label=Followers&amp;color=0969da" alt="GitHub followers" /></a>
@@ -20,14 +24,15 @@
 
 | Metric | Total |
 | --- | ---: |
-| Public repositories | **8** |
+| Public repositories | **9** |
 | Original public projects | **7** |
 | Followers | **9** |
 | Stars on original repositories | **2** |
-| Contributions in the last 12 months | **36** |
+| Contributions in the last 12 months | **38** |
 
 ## Languages
 
+Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
   <img src="https://img.shields.io/badge/Python-37.4%25-3776AB?style=flat-square&amp;logo=python" alt="Python 37.4%" />
@@ -83,8 +88,8 @@
 
 ## Recent Public Activity
 
+- **Jun 9, 2026:** Created branch `main` in [metehankaygsz/metehankaygsz](https://github.com/metehankaygsz/metehankaygsz)
 - **Jun 9, 2026:** Merged [pull request #4](https://github.com/MISDataGit/MISdata/pull/4) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Opened [pull request #4](https://github.com/MISDataGit/MISdata/pull/4) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Created branch `docs/readme-visual-examples` in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Closed [issue #1](https://github.com/metehankaygsz/Ceng382_25-26_c2238019/issues/1) in [metehankaygsz/Ceng382_25-26_c2238019](https://github.com/metehankaygsz/Ceng382_25-26_c2238019)
