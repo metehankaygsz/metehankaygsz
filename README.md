@@ -7,10 +7,9 @@
 
   <h1>Metehan Kaygısız</h1>
 
-
   <p>
-    <a href="https://github.com/metehankaygsz?tab=followers"><img src="https://img.shields.io/github/followers/metehankaygsz?style=flat-square&amp;label=Followers&amp;color=0969da" alt="GitHub followers" /></a>
-    <a href="https://github.com/metehankaygsz?tab=repositories"><img src="https://img.shields.io/github/stars/metehankaygsz?affiliations=OWNER&amp;style=flat-square&amp;label=Stars&amp;color=0969da" alt="GitHub stars" /></a>
+    <a href="https://github.com/metehankaygsz?tab=followers"><img src="https://img.shields.io/github/followers/metehankaygsz?style=flat-square&label=Followers&color=0969da" alt="GitHub followers" /></a>
+    <a href="https://github.com/metehankaygsz?tab=repositories"><img src="https://img.shields.io/github/stars/metehankaygsz?affiliations=OWNER&style=flat-square&label=Stars&color=0969da" alt="GitHub stars" /></a>
     <img src="https://img.shields.io/badge/Ankara-E30A17?style=flat-square" alt="Based in Ankara" />
     <img src="https://img.shields.io/badge/GitHub%20since-May%202020-181717?style=flat-square&amp;logo=github" alt="GitHub member since May 2020" />
   </p>
@@ -24,9 +23,11 @@
 | Original public projects | **7** |
 | Followers | **9** |
 | Stars on original repositories | **2** |
-| Contributions in the last 12 months | **38** |
+| Contributions in the last 12 months | **40** |
 
 ## Languages
+
+Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
   <img src="https://img.shields.io/badge/Python-37.4%25-3776AB?style=flat-square&amp;logo=python" alt="Python 37.4%" />
@@ -82,8 +83,8 @@
 
 ## Recent Public Activity
 
+- **Jun 9, 2026:** Pushed updates to [metehankaygsz/metehankaygsz](https://github.com/metehankaygsz/metehankaygsz)
 - **Jun 9, 2026:** Created branch `main` in [metehankaygsz/metehankaygsz](https://github.com/metehankaygsz/metehankaygsz)
 - **Jun 9, 2026:** Merged [pull request #4](https://github.com/MISDataGit/MISdata/pull/4) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Opened [pull request #4](https://github.com/MISDataGit/MISdata/pull/4) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Created branch `docs/readme-visual-examples` in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
