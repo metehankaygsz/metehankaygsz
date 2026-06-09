@@ -4,13 +4,9 @@
 -->
 
 <div align="center">
-  <a href="https://github.com/metehankaygsz">
-    <img src="https://avatars.githubusercontent.com/u/64954684?v=4" width="112" alt="Metehan Kaygısız" />
-  </a>
 
   <h1>Metehan Kaygısız</h1>
 
-  <p><strong>Building public projects across Python, C#, and TypeScript.</strong></p>
 
   <p>
     <a href="https://github.com/metehankaygsz?tab=followers"><img src="https://img.shields.io/github/followers/metehankaygsz?style=flat-square&amp;label=Followers&amp;color=0969da" alt="GitHub followers" /></a>
@@ -32,8 +28,6 @@
 
 ## Languages
 
-Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
-
 <p>
   <img src="https://img.shields.io/badge/Python-37.4%25-3776AB?style=flat-square&amp;logo=python" alt="Python 37.4%" />
   <img src="https://img.shields.io/badge/C%23-22.3%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 22.3%" />
@@ -47,7 +41,7 @@ Automatically calculated from GitHub's language data for my current public, non-
   <img src="https://img.shields.io/badge/JavaScript-%3C0.1%25-F7DF1E?style=flat-square&amp;logo=javascript&amp;logoColor=black" alt="JavaScript &lt;0.1%" />
 </p>
 
-## Detected Toolkit
+## Toolkits
 
 <p>
   <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&amp;logo=dotnet" alt=".NET" />
