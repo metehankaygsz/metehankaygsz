@@ -23,7 +23,7 @@
 | Original public projects | **6** |
 | Followers | **9** |
 | Stars on original repositories | **2** |
-| Contributions in the last 12 months | **47** |
+| Contributions in the last 12 months | **50** |
 
 ## Languages
 
@@ -83,8 +83,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
-- **Jun 9, 2026:** Merged [pull request #6](https://github.com/MISDataGit/MISdata/pull/6) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Opened [pull request #6](https://github.com/MISDataGit/MISdata/pull/6) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Created branch `fix/change-period-reaggregation` in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Opened [pull request #5](https://github.com/410979729/scope-recall/pull/5) in [410979729/scope-recall](https://github.com/410979729/scope-recall)
+- **Jun 9, 2026:** Merged [pull request #7](https://github.com/MISDataGit/MISdata/pull/7) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Opened [pull request #7](https://github.com/MISDataGit/MISdata/pull/7) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Created branch `fix/reject-invalid-period-conversions` in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 9, 2026:** Opened [pull request #5](https://github.com/410979729/scope-recall-hermes/pull/5) in [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes)
