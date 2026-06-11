@@ -19,27 +19,27 @@
 
 | Metric | Total |
 | --- | ---: |
-| Public repositories | **9** |
-| Original public projects | **6** |
+| Public repositories | **10** |
+| Original public projects | **7** |
 | Followers | **9** |
 | Stars on original repositories | **2** |
-| Contributions in the last 12 months | **50** |
+| Contributions in the last 12 months | **63** |
 
 ## Languages
 
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-39.3%25-3776AB?style=flat-square&amp;logo=python" alt="Python 39.3%" />
-  <img src="https://img.shields.io/badge/C%23-20.9%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 20.9%" />
-  <img src="https://img.shields.io/badge/TypeScript-16.4%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 16.4%" />
-  <img src="https://img.shields.io/badge/HTML-14.2%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 14.2%" />
-  <img src="https://img.shields.io/badge/C%2B%2B-2.9%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.9%" />
-  <img src="https://img.shields.io/badge/Assembly-2.2%25-6E4C13?style=flat-square" alt="Assembly 2.2%" />
+  <img src="https://img.shields.io/badge/Python-38.6%25-3776AB?style=flat-square&amp;logo=python" alt="Python 38.6%" />
+  <img src="https://img.shields.io/badge/C%23-20.5%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 20.5%" />
+  <img src="https://img.shields.io/badge/TypeScript-16.1%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 16.1%" />
+  <img src="https://img.shields.io/badge/HTML-13.9%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 13.9%" />
+  <img src="https://img.shields.io/badge/C%2B%2B-2.8%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.8%" />
+  <img src="https://img.shields.io/badge/Assembly-2.1%25-6E4C13?style=flat-square" alt="Assembly 2.1%" />
+  <img src="https://img.shields.io/badge/Shell-1.8%25-4EAA25?style=flat-square&amp;logo=gnubash" alt="Shell 1.8%" />
   <img src="https://img.shields.io/badge/CSS-1.5%25-663399?style=flat-square&amp;logo=css" alt="CSS 1.5%" />
-  <img src="https://img.shields.io/badge/C-1.4%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.4%" />
+  <img src="https://img.shields.io/badge/C-1.3%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.3%" />
   <img src="https://img.shields.io/badge/Makefile-1.2%25-427819?style=flat-square&amp;logo=gnu" alt="Makefile 1.2%" />
-  <img src="https://img.shields.io/badge/JavaScript-%3C0.1%25-F7DF1E?style=flat-square&amp;logo=javascript&amp;logoColor=black" alt="JavaScript &lt;0.1%" />
 </p>
 
 ## Toolkits
@@ -47,6 +47,7 @@ Automatically calculated from GitHub's language data for my current public, non-
 <p>
   <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&amp;logo=dotnet" alt=".NET" />
   <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&amp;logo=fastapi" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&amp;logo=githubactions" alt="GitHub Actions" />
   <img src="https://img.shields.io/badge/GNU%20Make-427819?style=for-the-badge&amp;logo=gnu" alt="GNU Make" />
   <img src="https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&amp;logo=nodedotjs" alt="Node.js" />
   <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&amp;logo=openai" alt="OpenAI" />
@@ -83,8 +84,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
-- **Jun 9, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 10, 2026:** Pushed updates to [metehankaygsz/bcm94360cd-linux](https://github.com/metehankaygsz/bcm94360cd-linux)
+- **Jun 10, 2026:** Published [BCM94360CD Linux v1.0.0](https://github.com/metehankaygsz/bcm94360cd-linux/releases/tag/v1.0.0) in [metehankaygsz/bcm94360cd-linux](https://github.com/metehankaygsz/bcm94360cd-linux)
+- **Jun 10, 2026:** Created branch `main` in [metehankaygsz/bcm94360cd-linux](https://github.com/metehankaygsz/bcm94360cd-linux)
+- **Jun 10, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
 - **Jun 9, 2026:** Merged [pull request #7](https://github.com/MISDataGit/MISdata/pull/7) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Opened [pull request #7](https://github.com/MISDataGit/MISdata/pull/7) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Created branch `fix/reject-invalid-period-conversions` in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Opened [pull request #5](https://github.com/410979729/scope-recall-hermes/pull/5) in [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes)
