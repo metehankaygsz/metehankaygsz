@@ -19,11 +19,11 @@
 
 | Metric | Total |
 | --- | ---: |
-| Public repositories | **10** |
+| Public repositories | **11** |
 | Original public projects | **7** |
 | Followers | **9** |
-| Stars on original repositories | **2** |
-| Contributions in the last 12 months | **63** |
+| Stars on original repositories | **3** |
+| Contributions in the last 12 months | **67** |
 
 ## Languages
 
@@ -84,8 +84,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
-- **Jun 10, 2026:** Pushed updates to [metehankaygsz/bcm94360cd-linux](https://github.com/metehankaygsz/bcm94360cd-linux)
-- **Jun 10, 2026:** Published [BCM94360CD Linux v1.0.0](https://github.com/metehankaygsz/bcm94360cd-linux/releases/tag/v1.0.0) in [metehankaygsz/bcm94360cd-linux](https://github.com/metehankaygsz/bcm94360cd-linux)
-- **Jun 10, 2026:** Created branch `main` in [metehankaygsz/bcm94360cd-linux](https://github.com/metehankaygsz/bcm94360cd-linux)
-- **Jun 10, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
-- **Jun 9, 2026:** Merged [pull request #7](https://github.com/MISDataGit/MISdata/pull/7) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 11, 2026:** Pushed updates to [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 11, 2026:** Closed [issue #8](https://github.com/MISDataGit/MISdata/issues/8) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 11, 2026:** Opened [issue #8](https://github.com/MISDataGit/MISdata/issues/8) in [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata)
+- **Jun 11, 2026:** Commented on [issue #14185](https://github.com/posit-dev/positron/pull/14185) in [posit-dev/positron](https://github.com/posit-dev/positron)
+- **Jun 11, 2026:** Pushed updates to [metehankaygsz/positron](https://github.com/metehankaygsz/positron)
