@@ -23,7 +23,7 @@
 | Original public projects | **7** |
 | Followers | **9** |
 | Stars on original repositories | **4** |
-| Contributions in the last 12 months | **69** |
+| Contributions in the last 12 months | **70** |
 
 ## Languages
 
@@ -65,6 +65,13 @@ Automatically calculated from GitHub's language data for my current public, non-
   <table>
     <tr>
       <td align="center" width="180">
+        <a href="https://github.com/metehankaygsz?achievement=galaxy-brain&amp;tab=achievements">
+          <img src="https://github.githubassets.com/assets/galaxy-brain-default-847262c21056.png" width="80" alt="Galaxy Brain achievement" />
+          <br />
+          <strong>Galaxy Brain</strong>
+        </a>
+      </td>
+      <td align="center" width="180">
         <a href="https://github.com/metehankaygsz?achievement=pair-extraordinaire&amp;tab=achievements">
           <img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" width="80" alt="Pair Extraordinaire achievement" />
           <br />
@@ -84,8 +91,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
+- **Jun 15, 2026:** Commented on [issue #1272](https://github.com/posit-dev/ark/pull/1272) in [posit-dev/ark](https://github.com/posit-dev/ark)
+- **Jun 15, 2026:** Closed [pull request #1272](https://github.com/posit-dev/ark/pull/1272) in [posit-dev/ark](https://github.com/posit-dev/ark)
 - **Jun 13, 2026:** Created branch `input-boundaries-ui-rpc` in [metehankaygsz/ark](https://github.com/metehankaygsz/ark)
 - **Jun 13, 2026:** Opened [pull request #1272](https://github.com/posit-dev/ark/pull/1272) in [posit-dev/ark](https://github.com/posit-dev/ark)
 - **Jun 13, 2026:** Pushed updates to [metehankaygsz/positron](https://github.com/metehankaygsz/positron)
-- **Jun 13, 2026:** Forked [posit-dev/ark](https://github.com/posit-dev/ark) to [metehankaygsz/ark](https://github.com/metehankaygsz/ark)
-- **Jun 13, 2026:** Commented on [issue #14185](https://github.com/posit-dev/positron/pull/14185) in [posit-dev/positron](https://github.com/posit-dev/positron)
