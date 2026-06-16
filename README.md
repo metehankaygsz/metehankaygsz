@@ -65,6 +65,13 @@ Automatically calculated from GitHub's language data for my current public, non-
   <table>
     <tr>
       <td align="center" width="180">
+        <a href="https://github.com/metehankaygsz?achievement=pull-shark&amp;tab=achievements">
+          <img src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" width="80" alt="Pull Shark achievement" />
+          <br />
+          <strong>Pull Shark</strong>
+        </a>
+      </td>
+      <td align="center" width="180">
         <a href="https://github.com/metehankaygsz?achievement=galaxy-brain&amp;tab=achievements">
           <img src="https://github.githubassets.com/assets/galaxy-brain-default-847262c21056.png" width="80" alt="Galaxy Brain achievement" />
           <br />
@@ -91,8 +98,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
+- **Jun 15, 2026:** Commented on [issue #28160](https://github.com/openai/codex/issues/28160) in [openai/codex](https://github.com/openai/codex)
 - **Jun 15, 2026:** Commented on [issue #1272](https://github.com/posit-dev/ark/pull/1272) in [posit-dev/ark](https://github.com/posit-dev/ark)
 - **Jun 15, 2026:** Closed [pull request #1272](https://github.com/posit-dev/ark/pull/1272) in [posit-dev/ark](https://github.com/posit-dev/ark)
 - **Jun 13, 2026:** Created branch `input-boundaries-ui-rpc` in [metehankaygsz/ark](https://github.com/metehankaygsz/ark)
 - **Jun 13, 2026:** Opened [pull request #1272](https://github.com/posit-dev/ark/pull/1272) in [posit-dev/ark](https://github.com/posit-dev/ark)
-- **Jun 13, 2026:** Pushed updates to [metehankaygsz/positron](https://github.com/metehankaygsz/positron)
