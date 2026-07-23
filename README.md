@@ -19,27 +19,27 @@
 
 | Metric | Total |
 | --- | ---: |
-| Public repositories | **12** |
-| Original public projects | **7** |
+| Public repositories | **13** |
+| Original public projects | **8** |
 | Followers | **9** |
 | Stars on original repositories | **5** |
-| Contributions in the last 12 months | **73** |
+| Contributions in the last 12 months | **77** |
 
 ## Languages
 
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-38.6%25-3776AB?style=flat-square&amp;logo=python" alt="Python 38.6%" />
-  <img src="https://img.shields.io/badge/C%23-20.5%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 20.5%" />
-  <img src="https://img.shields.io/badge/TypeScript-16.1%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 16.1%" />
-  <img src="https://img.shields.io/badge/HTML-13.9%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 13.9%" />
-  <img src="https://img.shields.io/badge/C%2B%2B-2.8%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.8%" />
-  <img src="https://img.shields.io/badge/Assembly-2.1%25-6E4C13?style=flat-square" alt="Assembly 2.1%" />
-  <img src="https://img.shields.io/badge/Shell-1.8%25-4EAA25?style=flat-square&amp;logo=gnubash" alt="Shell 1.8%" />
-  <img src="https://img.shields.io/badge/CSS-1.5%25-663399?style=flat-square&amp;logo=css" alt="CSS 1.5%" />
+  <img src="https://img.shields.io/badge/Python-36.5%25-3776AB?style=flat-square&amp;logo=python" alt="Python 36.5%" />
+  <img src="https://img.shields.io/badge/C%23-19.4%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 19.4%" />
+  <img src="https://img.shields.io/badge/HTML-18.5%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 18.5%" />
+  <img src="https://img.shields.io/badge/TypeScript-15.2%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 15.2%" />
+  <img src="https://img.shields.io/badge/C%2B%2B-2.7%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.7%" />
+  <img src="https://img.shields.io/badge/Assembly-2.0%25-6E4C13?style=flat-square" alt="Assembly 2.0%" />
+  <img src="https://img.shields.io/badge/Shell-1.7%25-4EAA25?style=flat-square&amp;logo=gnubash" alt="Shell 1.7%" />
+  <img src="https://img.shields.io/badge/CSS-1.4%25-663399?style=flat-square&amp;logo=css" alt="CSS 1.4%" />
   <img src="https://img.shields.io/badge/C-1.3%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.3%" />
-  <img src="https://img.shields.io/badge/Makefile-1.2%25-427819?style=flat-square&amp;logo=gnu" alt="Makefile 1.2%" />
+  <img src="https://img.shields.io/badge/Makefile-1.1%25-427819?style=flat-square&amp;logo=gnu" alt="Makefile 1.1%" />
 </p>
 
 ## Toolkits
@@ -98,8 +98,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
+- **Jul 22, 2026:** Pushed updates to [metehankaygsz/pico-support](https://github.com/metehankaygsz/pico-support)
+- **Jul 22, 2026:** Created branch `main` in [metehankaygsz/pico-support](https://github.com/metehankaygsz/pico-support)
 - **Jul 10, 2026:** Commented on [issue #28160](https://github.com/openai/codex/issues/28160) in [openai/codex](https://github.com/openai/codex)
 - **Jul 7, 2026:** Commented on [issue #14670](https://github.com/posit-dev/positron/pull/14670) in [posit-dev/positron](https://github.com/posit-dev/positron)
 - **Jul 7, 2026:** Closed [pull request #14670](https://github.com/posit-dev/positron/pull/14670) in [posit-dev/positron](https://github.com/posit-dev/positron)
-- **Jul 3, 2026:** Opened [pull request #14670](https://github.com/posit-dev/positron/pull/14670) in [posit-dev/positron](https://github.com/posit-dev/positron)
-- **Jul 3, 2026:** Created branch `feature/quarto-shared-sessions` in [metehankaygsz/positron](https://github.com/metehankaygsz/positron)
