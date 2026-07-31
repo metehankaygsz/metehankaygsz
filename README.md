@@ -22,8 +22,8 @@
 | Public repositories | **14** |
 | Original public projects | **9** |
 | Followers | **10** |
-| Stars on original repositories | **6** |
-| Contributions in the last 12 months | **85** |
+| Stars on original repositories | **8** |
+| Contributions in the last 12 months | **98** |
 
 ## Languages
 
@@ -98,8 +98,8 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
-- **Jul 28, 2026:** Pushed updates to [metehankaygsz/minimal-headunit-launcher](https://github.com/metehankaygsz/minimal-headunit-launcher)
-- **Jul 28, 2026:** Created branch `main` in [metehankaygsz/minimal-headunit-launcher](https://github.com/metehankaygsz/minimal-headunit-launcher)
+- **Jul 30, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
+- **Jul 28, 2026:** Created branch `main` in [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 - **Jul 22, 2026:** Pushed updates to [metehankaygsz/pico-support](https://github.com/metehankaygsz/pico-support)
 - **Jul 22, 2026:** Created branch `main` in [metehankaygsz/pico-support](https://github.com/metehankaygsz/pico-support)
 - **Jul 10, 2026:** Commented on [issue #28160](https://github.com/openai/codex/issues/28160) in [openai/codex](https://github.com/openai/codex)
