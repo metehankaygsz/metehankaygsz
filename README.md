@@ -22,7 +22,7 @@
 | Public repositories | **14** |
 | Original public projects | **9** |
 | Followers | **10** |
-| Stars on original repositories | **8** |
+| Stars on original repositories | **10** |
 | Contributions in the last 12 months | **98** |
 
 ## Languages
