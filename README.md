@@ -22,24 +22,24 @@
 | Public repositories | **15** |
 | Original public projects | **10** |
 | Followers | **10** |
-| Stars on original repositories | **10** |
-| Contributions in the last 12 months | **99** |
+| Stars on original repositories | **11** |
+| Contributions in the last 12 months | **108** |
 
 ## Languages
 
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-32.2%25-3776AB?style=flat-square&amp;logo=python" alt="Python 32.2%" />
-  <img src="https://img.shields.io/badge/C%23-17.1%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 17.1%" />
-  <img src="https://img.shields.io/badge/HTML-16.4%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 16.4%" />
-  <img src="https://img.shields.io/badge/TypeScript-13.4%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 13.4%" />
-  <img src="https://img.shields.io/badge/Kotlin-11.6%25-7F52FF?style=flat-square&amp;logo=kotlin" alt="Kotlin 11.6%" />
-  <img src="https://img.shields.io/badge/C%2B%2B-2.4%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.4%" />
-  <img src="https://img.shields.io/badge/Assembly-1.8%25-6E4C13?style=flat-square" alt="Assembly 1.8%" />
-  <img src="https://img.shields.io/badge/Shell-1.7%25-4EAA25?style=flat-square&amp;logo=gnubash" alt="Shell 1.7%" />
-  <img src="https://img.shields.io/badge/CSS-1.2%25-663399?style=flat-square&amp;logo=css" alt="CSS 1.2%" />
-  <img src="https://img.shields.io/badge/C-1.1%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.1%" />
+  <img src="https://img.shields.io/badge/Python-29.2%25-3776AB?style=flat-square&amp;logo=python" alt="Python 29.2%" />
+  <img src="https://img.shields.io/badge/Kotlin-20.0%25-7F52FF?style=flat-square&amp;logo=kotlin" alt="Kotlin 20.0%" />
+  <img src="https://img.shields.io/badge/C%23-15.5%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 15.5%" />
+  <img src="https://img.shields.io/badge/HTML-14.8%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 14.8%" />
+  <img src="https://img.shields.io/badge/TypeScript-12.2%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 12.2%" />
+  <img src="https://img.shields.io/badge/C%2B%2B-2.1%25-00599C?style=flat-square&amp;logo=cplusplus" alt="C++ 2.1%" />
+  <img src="https://img.shields.io/badge/Assembly-1.6%25-6E4C13?style=flat-square" alt="Assembly 1.6%" />
+  <img src="https://img.shields.io/badge/Shell-1.6%25-4EAA25?style=flat-square&amp;logo=gnubash" alt="Shell 1.6%" />
+  <img src="https://img.shields.io/badge/CSS-1.1%25-663399?style=flat-square&amp;logo=css" alt="CSS 1.1%" />
+  <img src="https://img.shields.io/badge/C-1.0%25-A8B9CC?style=flat-square&amp;logo=c&amp;logoColor=black" alt="C 1.0%" />
 </p>
 
 ## Toolkits
@@ -98,7 +98,7 @@ Automatically calculated from GitHub's language data for my current public, non-
 
 ## Recent Public Activity
 
-- **Aug 9, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
+- **Aug 10, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 - **May 12, 2020:** Made [metehankaygsz/switch-tr](https://github.com/metehankaygsz/switch-tr) public
 - **Jul 28, 2026:** Created branch `main` in [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 - **Jul 22, 2026:** Pushed updates to [metehankaygsz/pico-support](https://github.com/metehankaygsz/pico-support)
