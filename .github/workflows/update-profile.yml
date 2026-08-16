@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/update-profile.yml"
       - "scripts/generate-profile.mjs"
+      - "WHATS_NEW.md"
 
 permissions:
   contents: write
@@ -34,6 +35,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROFILE_USERNAME: ${{ github.repository_owner }}
+          PROFILE_UTC_OFFSET: "3"
+          # Optional: set these as repository variables to show a now-playing
+          # badge. The section is omitted when they are empty.
+          SPOTIFY_STATUS_URL: ${{ vars.SPOTIFY_STATUS_URL }}
+          SPOTIFY_PROFILE_URL: ${{ vars.SPOTIFY_PROFILE_URL }}
 
       - name: Commit changed profile data
         shell: bash

@@ -1,10 +1,20 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..");
 const outputPath = path.join(repositoryRoot, "README.md");
+const nowSectionPath = path.join(repositoryRoot, "WHATS_NEW.md");
+
+// Hour-of-day stats are reported in this offset so the histogram matches the
+// author's own clock rather than UTC.
+const localUtcOffsetHours = Number(process.env.PROFILE_UTC_OFFSET ?? 3);
+
+// Optional: a URL to a now-playing image (for example a self-hosted novatorem
+// deployment). The section is skipped entirely when this is not configured.
+const spotifyStatusUrl = process.env.SPOTIFY_STATUS_URL || "";
+const spotifyProfileUrl = process.env.SPOTIFY_PROFILE_URL || "";
 
 const username =
   process.env.PROFILE_USERNAME ||
@@ -27,8 +37,10 @@ const apiHeaders = {
   ...(token ? { Authorization: `Bearer ${token}` } : {}),
 };
 
+// Colors are chosen to stay legible against both the light and dark GitHub
+// themes, so near-black brand colors are replaced with lighter equivalents.
 const languageStyles = {
-  Assembly: { color: "6E4C13" },
+  Assembly: { color: "8A6A2F" },
   C: { color: "A8B9CC", logo: "c", logoColor: "black" },
   "C#": { color: "512BD4", logo: "csharp" },
   "C++": { color: "00599C", logo: "cplusplus" },
@@ -44,7 +56,7 @@ const languageStyles = {
   PHP: { color: "777BB4", logo: "php" },
   Python: { color: "3776AB", logo: "python" },
   Ruby: { color: "CC342D", logo: "ruby" },
-  Rust: { color: "000000", logo: "rust" },
+  Rust: { color: "DEA584", logo: "rust", logoColor: "black" },
   Shell: { color: "4EAA25", logo: "gnubash" },
   Swift: { color: "F05138", logo: "swift" },
   TypeScript: { color: "3178C6", logo: "typescript" },
@@ -59,7 +71,7 @@ const technologyStyles = {
   "Node.js": { color: "5FA04E", logo: "nodedotjs" },
   OpenAI: { color: "412991", logo: "openai" },
   Pytest: { color: "0A9EDC", logo: "pytest" },
-  React: { color: "20232A", logo: "react", logoColor: "61DAFB" },
+  React: { color: "149ECA", logo: "react", logoColor: "white" },
   SDL2: { color: "173B6C" },
   SQLAlchemy: { color: "D71F00", logo: "sqlalchemy" },
   Tailwind: { color: "06B6D4", logo: "tailwindcss" },
@@ -151,6 +163,7 @@ async function getProfileGraphData() {
     `
       query ProfileData($login: String!, $from: DateTime!, $to: DateTime!) {
         user(login: $login) {
+          bio
           contributionsCollection(from: $from, to: $to) {
             contributionCalendar {
               totalContributions
@@ -159,6 +172,20 @@ async function getProfileGraphData() {
             totalIssueContributions
             totalPullRequestContributions
             totalPullRequestReviewContributions
+          }
+          pinnedItems(first: 6, types: REPOSITORY) {
+            nodes {
+              ... on Repository {
+                nameWithOwner
+                description
+                url
+                stargazerCount
+                forkCount
+                primaryLanguage {
+                  name
+                }
+              }
+            }
           }
         }
       }
@@ -484,16 +511,36 @@ function capitalize(value) {
   return `${value[0].toUpperCase()}${value.slice(1)}`;
 }
 
-async function getRecentActivity() {
-  const events =
-    (await getOptionalJson(
-      `/users/${encodeURIComponent(username)}/events/public?per_page=50`,
-      [],
-    )) || [];
+async function getPublicEvents() {
+  const events = [];
+
+  for (let page = 1; page <= 3; page += 1) {
+    const batch =
+      (await getOptionalJson(
+        `/users/${encodeURIComponent(username)}/events/public?per_page=100&page=${page}`,
+        [],
+      )) || [];
+    events.push(...batch);
+
+    if (batch.length < 100) {
+      break;
+    }
+  }
+
+  return events;
+}
+
+function buildRecentActivity(events) {
   const activity = [];
   const seen = new Set();
 
-  for (const event of events) {
+  // Sort before deduplicating so the newest event wins its signature and the
+  // rendered list is genuinely in reverse-chronological order.
+  const ordered = [...events].sort(
+    (left, right) => new Date(right.created_at) - new Date(left.created_at),
+  );
+
+  for (const event of ordered) {
     const description = eventDescription(event);
     if (!description) continue;
 
@@ -596,14 +643,253 @@ function renderRecentActivity(activity) {
     .join("\n");
 }
 
+function formatBytes(bytes) {
+  if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  if (bytes >= 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${bytes} B`;
+}
+
+function formatNumber(value) {
+  return new Intl.NumberFormat("en").format(value);
+}
+
+function pickFeaturedRepositories(graphData, repositories) {
+  const pinned = (graphData?.user?.pinnedItems?.nodes || []).filter(Boolean);
+
+  if (pinned.length > 0) {
+    return pinned.map((repository) => ({
+      name: repository.nameWithOwner.split("/").at(-1),
+      description: repository.description || "",
+      url: repository.url,
+      stars: repository.stargazerCount,
+      forks: repository.forkCount,
+      language: repository.primaryLanguage?.name || "",
+    }));
+  }
+
+  // Without pinned repositories, fall back to the most-starred projects and
+  // break ties with whichever was pushed to most recently.
+  return [...repositories]
+    .sort(
+      (left, right) =>
+        right.stargazers_count - left.stargazers_count ||
+        new Date(right.pushed_at || right.updated_at) -
+          new Date(left.pushed_at || left.updated_at),
+    )
+    .slice(0, 6)
+    .map((repository) => ({
+      name: repository.name,
+      description: repository.description || "",
+      url: repository.html_url,
+      stars: repository.stargazers_count,
+      forks: repository.forks_count,
+      language: repository.language || "",
+    }));
+}
+
+function renderFeaturedProjects(featured) {
+  if (featured.length === 0) {
+    return "Featured projects will appear here as public repositories are added.";
+  }
+
+  const cell = (project) => {
+    const meta = [
+      project.language ? escapeHtml(project.language) : "",
+      `★ ${project.stars}`,
+      `⑂ ${project.forks}`,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
+    return `      <td width="50%" valign="top">
+        <a href="${escapeHtml(project.url)}"><strong>${escapeHtml(project.name)}</strong></a><br />
+        ${escapeHtml(project.description || "No description yet.")}<br />
+        <sub>${meta}</sub>
+      </td>`;
+  };
+
+  const rows = [];
+  for (let index = 0; index < featured.length; index += 2) {
+    const pair = featured.slice(index, index + 2);
+    const cells = pair.map(cell);
+
+    // Keep the table rectangular so the second column does not collapse.
+    if (cells.length === 1) {
+      cells.push('      <td width="50%"></td>');
+    }
+
+    rows.push(`    <tr>\n${cells.join("\n")}\n    </tr>`);
+  }
+
+  return `<table>\n${rows.join("\n")}\n</table>`;
+}
+
+function renderLanguageBar(languages, width = 28) {
+  const shown = languages.slice(0, 10);
+  if (shown.length === 0) return "";
+
+  const nameWidth = Math.max(...shown.map((language) => language.name.length));
+
+  const lines = shown.map((language) => {
+    const filled = Math.max(
+      1,
+      Math.round((language.percentage / 100) * width),
+    );
+    const bar = "█".repeat(filled) + "░".repeat(Math.max(0, width - filled));
+    const percentage =
+      language.percentage < 0.1 ? "<0.1" : language.percentage.toFixed(1);
+    return `${language.name.padEnd(nameWidth)}  ${bar}  ${percentage.padStart(4)}%`;
+  });
+
+  return ["```text", ...lines, "```"].join("\n");
+}
+
+function commitHourHistogram(events) {
+  const hours = new Array(24).fill(0);
+  let total = 0;
+
+  for (const event of events) {
+    if (event.type !== "PushEvent") continue;
+
+    const utcHour = new Date(event.created_at).getUTCHours();
+    const localHour = (utcHour + localUtcOffsetHours + 24) % 24;
+    const commits = event.payload?.size || event.payload?.commits?.length || 1;
+
+    hours[localHour] += commits;
+    total += commits;
+  }
+
+  return { hours, total };
+}
+
+function renderCommitClock({ hours, total }) {
+  // Public events only cover a rolling window, so a thin sample would show a
+  // misleading shape. Skip the chart rather than draw noise.
+  if (total < 5) return "";
+
+  const blocks = "▁▂▃▄▅▆▇█";
+  const peak = Math.max(...hours);
+  const sparkline = hours
+    .map((count) => {
+      if (count === 0) return " ";
+      const level = Math.ceil((count / peak) * (blocks.length - 1));
+      return blocks[level];
+    })
+    .join("");
+
+  const ticks = Array.from({ length: 24 }, (_, hour) =>
+    hour % 6 === 0 ? "|" : " ",
+  ).join("");
+  // Each label is two characters wide, so the following column is consumed by
+  // the label itself and must not also emit a space.
+  let labelRow = "";
+  for (let hour = 0; hour < 24; hour += 1) {
+    if (hour % 6 === 0) {
+      labelRow += String(hour).padStart(2, "0");
+    } else if (hour % 6 !== 1) {
+      labelRow += " ";
+    }
+  }
+
+  const offsetLabel =
+    localUtcOffsetHours >= 0
+      ? `UTC+${localUtcOffsetHours}`
+      : `UTC${localUtcOffsetHours}`;
+
+  return [
+    `When I push, by hour of day (${offsetLabel}, from recent public events):`,
+    "",
+    "```text",
+    sparkline,
+    ticks,
+    labelRow,
+    "```",
+  ].join("\n");
+}
+
+function renderFunFacts(repositories, languages, commitClock) {
+  const facts = [];
+
+  const totalBytes = languages.reduce(
+    (sum, language) => sum + language.bytes,
+    0,
+  );
+  if (totalBytes > 0) {
+    facts.push(`| Code across public repositories | **${formatBytes(totalBytes)}** |`);
+  }
+
+  const licenses = new Map();
+  for (const repository of repositories) {
+    const license = repository.license?.spdx_id;
+    if (!license || license === "NOASSERTION") continue;
+    licenses.set(license, (licenses.get(license) || 0) + 1);
+  }
+  const topLicense = [...licenses.entries()].sort(
+    (left, right) => right[1] - left[1],
+  )[0];
+  if (topLicense) {
+    facts.push(
+      `| Most-used license | **${topLicense[0]}** (${topLicense[1]} repositories) |`,
+    );
+  }
+
+  const oldest = [...repositories].sort(
+    (left, right) => new Date(left.created_at) - new Date(right.created_at),
+  )[0];
+  if (oldest) {
+    const years =
+      (Date.now() - new Date(oldest.created_at)) / (365.25 * 24 * 60 * 60 * 1000);
+    facts.push(
+      `| Longest-lived project | **${oldest.name}** (${years.toFixed(1)} years) |`,
+    );
+  }
+
+  if (commitClock.total >= 5) {
+    const peakHour = commitClock.hours.indexOf(Math.max(...commitClock.hours));
+    facts.push(
+      `| Busiest pushing hour | **${String(peakHour).padStart(2, "0")}:00** |`,
+    );
+  }
+
+  if (facts.length === 0) return "";
+
+  return ["| Detail | Value |", "| --- | ---: |", ...facts].join("\n");
+}
+
+async function readNowSection() {
+  try {
+    const contents = await readFile(nowSectionPath, "utf8");
+    // The heading lives in the generated README, so strip a leading one from
+    // the hand-edited source to avoid doubling it up. Authoring notes written
+    // as HTML comments are for the source file only and should not be copied.
+    const body = contents
+      .replace(/^\s*#[^\n]*\n/, "")
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .trim();
+    return body || "";
+  } catch {
+    return "";
+  }
+}
+
+function renderNowPlaying() {
+  if (!spotifyStatusUrl) return "";
+
+  const badge = `<img src="${escapeHtml(spotifyStatusUrl)}" alt="Currently playing on Spotify" />`;
+  return spotifyProfileUrl
+    ? `<a href="${escapeHtml(spotifyProfileUrl)}">${badge}</a>`
+    : badge;
+}
+
 function renderStats(profile, repositories, graphData) {
   const stars = repositories.reduce(
     (sum, repository) => sum + repository.stargazers_count,
     0,
   );
+  const contributionsCollection =
+    graphData?.user?.contributionsCollection;
   const contributions =
-    graphData?.user?.contributionsCollection?.contributionCalendar
-      ?.totalContributions;
+    contributionsCollection?.contributionCalendar?.totalContributions;
 
   const rows = [
     ["Public repositories", profile.public_repos],
@@ -611,12 +897,24 @@ function renderStats(profile, repositories, graphData) {
     ["Followers", profile.followers],
     ["Stars on original repositories", stars],
     contributions == null ? null : ["Contributions in the last 12 months", contributions],
+    contributionsCollection == null
+      ? null
+      : ["— commits", contributionsCollection.totalCommitContributions],
+    contributionsCollection == null
+      ? null
+      : ["— pull requests", contributionsCollection.totalPullRequestContributions],
+    contributionsCollection == null
+      ? null
+      : ["— code reviews", contributionsCollection.totalPullRequestReviewContributions],
+    contributionsCollection == null
+      ? null
+      : ["— issues", contributionsCollection.totalIssueContributions],
   ].filter(Boolean);
 
   return [
     "| Metric | Total |",
     "| --- | ---: |",
-    ...rows.map(([label, value]) => `| ${label} | **${value}** |`),
+    ...rows.map(([label, value]) => `| ${label} | **${formatNumber(value)}** |`),
   ].join("\n");
 }
 
@@ -628,8 +926,15 @@ function buildReadme({
   technologies,
   achievements,
   activity,
+  featured,
+  commitClock,
+  nowSection,
 }) {
   const displayName = escapeHtml(profile.name || profile.login);
+  const bio = cleanMarkdownText(
+    profile.bio || graphData?.user?.bio || "",
+  );
+  const tagline = bio || "Building things, mostly in public.";
 
   const profileBadges = [
     `<a href="https://github.com/${username}?tab=followers"><img src="https://img.shields.io/github/followers/${username}?style=flat-square&label=Followers&color=0969da" alt="GitHub followers" /></a>`,
@@ -655,39 +960,65 @@ function buildReadme({
   profileBadges.push(
     image(
       shieldBadge("GitHub since", joinedDate, "flat-square", {
-        color: "181717",
+        color: "57606A",
         logo: "github",
       }),
       `GitHub member since ${joinedDate}`,
     ),
   );
 
-  const languageBadges = languages.slice(0, 10).map(languageBadge);
+  const languageBadges = languages.slice(0, 5).map(languageBadge);
   const technologyBadges = technologies.map(technologyBadge);
+  const funFacts = renderFunFacts(repositories, languages, commitClock);
+  const commitClockChart = renderCommitClock(commitClock);
+  const nowPlaying = renderNowPlaying();
+  const generatedOn = formatDate(new Date());
+
+  const optionalSection = (heading, body) =>
+    body ? `\n## ${heading}\n\n${body}\n` : "";
 
   return `<!--
   This file is generated by scripts/generate-profile.mjs.
   Edit the generator, not README.md. The scheduled workflow only commits when data changes.
+  Prose for the "Now" section lives in WHATS_NEW.md and is inlined here.
 -->
 
 <div align="center">
 
   <h1>${displayName}</h1>
 
+  <p><em>${escapeHtml(tagline)}</em></p>
+
   <p>
     ${profileBadges.join("\n    ")}
   </p>
 </div>
 
+## Featured Projects
+
+${renderFeaturedProjects(featured)}
+${optionalSection("Now", nowSection)}
+## Contribution Graph
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${username}/${username}/output/github-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/${username}/${username}/output/github-snake.svg" />
+    <img src="https://raw.githubusercontent.com/${username}/${username}/output/github-snake.svg" alt="Contribution graph animation" />
+  </picture>
+</div>
+
 ## GitHub Snapshot
 
 ${renderStats(profile, repositories, graphData)}
-
+${optionalSection("By the Numbers", funFacts)}${optionalSection("Commit Clock", commitClockChart)}
 ## Languages
 
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 ${renderBadges(languageBadges)}
+
+${renderLanguageBar(languages)}
 
 ## Toolkits
 
@@ -704,18 +1035,28 @@ ${renderAchievements(achievements)}
 ## Recent Public Activity
 
 ${renderRecentActivity(activity)}
+${optionalSection("Currently Playing", nowPlaying)}
+---
+
+<div align="center">
+  <sub>Updated automatically · ${generatedOn}</sub>
+</div>
 `;
 }
 
 async function main() {
-  const [profile, publicRepositories, graphData, achievements, activity] =
+  const [profile, publicRepositories, graphData, achievements, events, nowSection] =
     await Promise.all([
       getJson(`/users/${encodeURIComponent(username)}`),
       listPublicRepositories(),
       getProfileGraphData(),
       getAchievements(),
-      getRecentActivity(),
+      getPublicEvents(),
+      readNowSection(),
     ]);
+
+  const activity = buildRecentActivity(events);
+  const commitClock = commitHourHistogram(events);
 
   const originalRepositories = publicRepositories.filter(
     (repository) =>
@@ -726,6 +1067,7 @@ async function main() {
   const repositories = await attachLanguages(originalRepositories);
   const languages = aggregateLanguages(repositories);
   const technologies = await detectTechnologies(repositories);
+  const featured = pickFeaturedRepositories(graphData, repositories);
   const readme = buildReadme({
     profile,
     repositories,
@@ -734,6 +1076,9 @@ async function main() {
     technologies,
     achievements,
     activity,
+    featured,
+    commitClock,
+    nowSection,
   });
 
   await writeFile(outputPath, readme, "utf8");
