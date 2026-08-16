@@ -235,6 +235,34 @@ async function getProfileGraphData() {
             totalIssueContributions
             totalPullRequestContributions
             totalPullRequestReviewContributions
+            commitContributionsByRepository(maxRepositories: 100) {
+              repository {
+                nameWithOwner
+                url
+                isPrivate
+                stargazerCount
+                owner {
+                  login
+                }
+              }
+              contributions {
+                totalCount
+              }
+            }
+            pullRequestContributionsByRepository(maxRepositories: 100) {
+              repository {
+                nameWithOwner
+                url
+                isPrivate
+                stargazerCount
+                owner {
+                  login
+                }
+              }
+              contributions {
+                totalCount
+              }
+            }
           }
           pinnedItems(first: 6, types: REPOSITORY) {
             nodes {
@@ -259,6 +287,134 @@ async function getProfileGraphData() {
       to: to.toISOString(),
     },
   );
+}
+
+// All-time pull requests the user opened anywhere. The GraphQL contributions
+// collection only covers the queried year, so this catches older work.
+async function searchAuthoredPullRequests() {
+  const query = encodeURIComponent(`type:pr author:${username}`);
+  const payload = await getOptionalJson(
+    `/search/issues?q=${query}&per_page=100&sort=created&order=desc`,
+    null,
+  );
+
+  return payload?.items || [];
+}
+
+function collectContributedRepositories(graphData, pullRequests) {
+  const contributions = new Map();
+  const isOwn = (owner) => owner.toLowerCase() === username.toLowerCase();
+
+  const entryFor = (nameWithOwner, url, stars) => {
+    if (!contributions.has(nameWithOwner)) {
+      contributions.set(nameWithOwner, {
+        nameWithOwner,
+        url,
+        stars: stars ?? 0,
+        commits: 0,
+        pullRequests: 0,
+        merged: 0,
+      });
+    }
+    const entry = contributions.get(nameWithOwner);
+    // Star counts only arrive with the GraphQL rows, so keep the best value.
+    if (stars != null && stars > entry.stars) entry.stars = stars;
+    return entry;
+  };
+
+  const collection = graphData?.user?.contributionsCollection;
+
+  for (const row of collection?.commitContributionsByRepository || []) {
+    const repository = row.repository;
+    if (!repository || repository.isPrivate) continue;
+    if (isOwn(repository.owner?.login || "")) continue;
+
+    entryFor(
+      repository.nameWithOwner,
+      repository.url,
+      repository.stargazerCount,
+    ).commits += row.contributions?.totalCount || 0;
+  }
+
+  for (const row of collection?.pullRequestContributionsByRepository || []) {
+    const repository = row.repository;
+    if (!repository || repository.isPrivate) continue;
+    if (isOwn(repository.owner?.login || "")) continue;
+
+    entryFor(
+      repository.nameWithOwner,
+      repository.url,
+      repository.stargazerCount,
+    ).pullRequests += row.contributions?.totalCount || 0;
+  }
+
+  // The search results are all-time, so they may name repositories the
+  // one-year GraphQL window missed entirely.
+  const seenPullRequests = new Map();
+
+  for (const item of pullRequests) {
+    const nameWithOwner = item.repository_url?.replace(
+      "https://api.github.com/repos/",
+      "",
+    );
+    if (!nameWithOwner || !nameWithOwner.includes("/")) continue;
+    if (isOwn(nameWithOwner.split("/")[0])) continue;
+
+    const counts = seenPullRequests.get(nameWithOwner) || {
+      total: 0,
+      merged: 0,
+    };
+    counts.total += 1;
+    if (item.pull_request?.merged_at) counts.merged += 1;
+    seenPullRequests.set(nameWithOwner, counts);
+  }
+
+  for (const [nameWithOwner, counts] of seenPullRequests) {
+    const entry = entryFor(
+      nameWithOwner,
+      `https://github.com/${nameWithOwner}`,
+      null,
+    );
+    // Prefer the all-time search count over the windowed GraphQL one rather
+    // than adding them, which would double-count the overlap.
+    entry.pullRequests = Math.max(entry.pullRequests, counts.total);
+    entry.merged = counts.merged;
+  }
+
+  return [...contributions.values()].sort(
+    (left, right) =>
+      right.merged - left.merged ||
+      right.pullRequests - left.pullRequests ||
+      right.commits - left.commits ||
+      right.stars - left.stars,
+  );
+}
+
+function renderContributedRepositories(contributed) {
+  if (contributed.length === 0) return "";
+
+  const rows = contributed.slice(0, 10).map((entry) => {
+    const parts = [];
+    if (entry.merged > 0) {
+      parts.push(`${entry.merged} merged PR${entry.merged === 1 ? "" : "s"}`);
+    } else if (entry.pullRequests > 0) {
+      parts.push(
+        `${entry.pullRequests} pull request${entry.pullRequests === 1 ? "" : "s"}`,
+      );
+    }
+    if (entry.commits > 0) {
+      parts.push(`${entry.commits} commit${entry.commits === 1 ? "" : "s"}`);
+    }
+
+    const stars = entry.stars > 0 ? `★ ${formatNumber(entry.stars)}` : "";
+    return `| [${entry.nameWithOwner}](${entry.url}) | ${parts.join(" · ") || "—"} | ${stars} |`;
+  });
+
+  return [
+    "| Repository | My contributions | Stars |",
+    "| --- | --- | ---: |",
+    ...rows,
+  ].join("\n");
 }
 
 async function attachLanguages(repositories) {
@@ -971,6 +1127,7 @@ function buildReadme({
   nowSection,
   hasContributionGraph,
   lineStats,
+  contributed,
 }) {
   const displayName = escapeHtml(profile.name || profile.login);
   // Only shown when there is a real bio to show — no invented filler.
@@ -1040,7 +1197,7 @@ ${tagline ? `  <p><em>${escapeHtml(tagline)}</em></p>\n` : ""}
 ## Featured Projects
 
 ${renderFeaturedProjects(featured)}
-${optionalSection("Now", nowSection)}
+${optionalSection("Repositories I Contribute To", renderContributedRepositories(contributed))}${optionalSection("Now", nowSection)}
 ${
   hasContributionGraph
     ? `## Contribution Graph
@@ -1084,15 +1241,23 @@ ${optionalSection("Currently Playing", nowPlaying)}
 }
 
 async function main() {
-  const [profile, publicRepositories, graphData, achievements, events, nowSection] =
-    await Promise.all([
-      getJson(`/users/${encodeURIComponent(username)}`),
-      listPublicRepositories(),
-      getProfileGraphData(),
-      getAchievements(),
-      getPublicEvents(),
-      readNowSection(),
-    ]);
+  const [
+    profile,
+    publicRepositories,
+    graphData,
+    achievements,
+    events,
+    pullRequests,
+    nowSection,
+  ] = await Promise.all([
+    getJson(`/users/${encodeURIComponent(username)}`),
+    listPublicRepositories(),
+    getProfileGraphData(),
+    getAchievements(),
+    getPublicEvents(),
+    searchAuthoredPullRequests(),
+    readNowSection(),
+  ]);
 
   const activity = buildRecentActivity(events);
   const commitClock = commitHourHistogram(events);
@@ -1106,6 +1271,7 @@ async function main() {
   const repositories = await attachLanguages(originalRepositories);
   const languages = aggregateLanguages(repositories);
   const featured = pickFeaturedRepositories(graphData, repositories);
+  const contributed = collectContributedRepositories(graphData, pullRequests);
   const hasContributionGraph = await writeContributionGraphs(graphData);
   const lineStats = await countAuthoredLines(repositories);
   const readme = buildReadme({
@@ -1120,6 +1286,7 @@ async function main() {
     nowSection,
     hasContributionGraph,
     lineStats,
+    contributed,
   });
 
   await writeFile(outputPath, readme, "utf8");
