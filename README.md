@@ -83,6 +83,9 @@
 
 | Detail | Value |
 | --- | ---: |
+| Lines of code written | **32,773** |
+| Lines deleted | **4,521** |
+| Net lines standing | **28,252** |
 | Code across public repositories | **822 KB** |
 | Most-used license | **MIT** (2 repositories) |
 | Longest-lived project | **reboottopayloadswitch** (6.3 years) |

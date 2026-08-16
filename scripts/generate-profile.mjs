@@ -139,6 +139,78 @@ async function graphql(query, variables) {
   }
 }
 
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+// The contributor-stats endpoint computes asynchronously: it answers 202 with
+// an empty body while GitHub builds the cache, so a few polite retries are
+// needed before the numbers are actually available.
+async function getContributorStats(repository, attempts = 6) {
+  const url = githubApi(`/repos/${repository.full_name}/stats/contributors`);
+
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    let response;
+
+    try {
+      response = await fetch(url, { headers: apiHeaders });
+    } catch (error) {
+      console.warn(`Skipping stats for ${repository.full_name}: ${error.message}`);
+      return null;
+    }
+
+    if (!response.ok && response.status !== 202) {
+      console.warn(
+        `Skipping stats for ${repository.full_name}: ${response.status} ${response.statusText}`,
+      );
+      return null;
+    }
+
+    const body = (await response.text()).trim();
+
+    if (response.status === 202 || body === "") {
+      await delay(2000);
+      continue;
+    }
+
+    try {
+      return JSON.parse(body);
+    } catch {
+      return null;
+    }
+  }
+
+  console.warn(`Stats for ${repository.full_name} were still building.`);
+  return null;
+}
+
+async function countAuthoredLines(repositories) {
+  let added = 0;
+  let removed = 0;
+  let counted = 0;
+
+  // Sequential on purpose: this endpoint is expensive for GitHub to build and
+  // parallel requests make the 202-retry loop far more likely to be hit.
+  for (const repository of repositories) {
+    const stats = await getContributorStats(repository);
+    if (!Array.isArray(stats)) continue;
+
+    const mine = stats.find(
+      (entry) =>
+        entry.author?.login?.toLowerCase() === username.toLowerCase(),
+    );
+    if (!mine) continue;
+
+    for (const week of mine.weeks || []) {
+      added += week.a || 0;
+      removed += week.d || 0;
+    }
+    counted += 1;
+  }
+
+  return { added, removed, counted };
+}
+
 async function listPublicRepositories() {
   const repositories = [];
 
@@ -923,8 +995,16 @@ function renderCommitClock({ hours, total }) {
   ].join("\n");
 }
 
-function renderFunFacts(repositories, languages, commitClock) {
+function renderFunFacts(repositories, languages, commitClock, lineStats) {
   const facts = [];
+
+  if (lineStats.added > 0) {
+    facts.push(`| Lines of code written | **${formatNumber(lineStats.added)}** |`);
+    facts.push(`| Lines deleted | **${formatNumber(lineStats.removed)}** |`);
+    facts.push(
+      `| Net lines standing | **${formatNumber(lineStats.added - lineStats.removed)}** |`,
+    );
+  }
 
   const totalBytes = languages.reduce(
     (sum, language) => sum + language.bytes,
@@ -1046,6 +1126,7 @@ function buildReadme({
   commitClock,
   nowSection,
   hasContributionGraph,
+  lineStats,
 }) {
   const displayName = escapeHtml(profile.name || profile.login);
   // Only shown when there is a real bio to show — no invented filler.
@@ -1084,7 +1165,12 @@ function buildReadme({
 
   const languageBadges = languages.slice(0, 5).map(languageBadge);
   const technologyBadges = technologies.map(technologyBadge);
-  const funFacts = renderFunFacts(repositories, languages, commitClock);
+  const funFacts = renderFunFacts(
+    repositories,
+    languages,
+    commitClock,
+    lineStats,
+  );
   const commitClockChart = renderCommitClock(commitClock);
   const nowPlaying = renderNowPlaying();
   const generatedOn = formatDate(new Date());
@@ -1187,6 +1273,7 @@ async function main() {
   const technologies = await detectTechnologies(repositories);
   const featured = pickFeaturedRepositories(graphData, repositories);
   const hasContributionGraph = await writeContributionGraphs(graphData);
+  const lineStats = await countAuthoredLines(repositories);
   const readme = buildReadme({
     profile,
     repositories,
@@ -1199,9 +1286,13 @@ async function main() {
     commitClock,
     nowSection,
     hasContributionGraph,
+    lineStats,
   });
 
   await writeFile(outputPath, readme, "utf8");
+  console.log(
+    `Line stats counted ${lineStats.counted}/${repositories.length} repositories.`,
+  );
   console.log(`Generated ${path.relative(process.cwd(), outputPath)} for ${username}.`);
 }
 
