@@ -1,3 +1,16 @@
+// Generates a GitHub profile README from public API data.
+//
+// Reusing this on another account needs no code changes: the username comes
+// from GITHUB_REPOSITORY_OWNER in Actions, or PROFILE_USERNAME / the first CLI
+// argument when run locally. Everything else is optional configuration read
+// from the environment, documented in .github/workflows/update-profile.yml.
+//
+//   node scripts/generate-profile.mjs <username>
+//
+// A token is optional but recommended: without one the GraphQL calls are
+// skipped, so the contribution graph, snapshot breakdown, and language colors
+// are omitted while the rest still renders.
+
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,9 +21,18 @@ const outputPath = path.join(repositoryRoot, "README.md");
 const nowSectionPath = path.join(repositoryRoot, "WHATS_NEW.md");
 const assetsDirectory = path.join(repositoryRoot, "assets");
 
-// Hour-of-day stats are reported in this offset so the histogram matches the
-// author's own clock rather than UTC.
-const localUtcOffsetHours = Number(process.env.PROFILE_UTC_OFFSET ?? 3);
+// Hour-of-day stats are reported in this offset so the histogram can match the
+// author's own clock. Defaults to UTC, since the API exposes no timezone.
+const localUtcOffsetHours = Number(process.env.PROFILE_UTC_OFFSET || 0);
+
+// Dates and numbers are formatted with this locale.
+const locale = process.env.PROFILE_LOCALE || "en";
+
+// Accent used for the location badge. Any hex color without the leading "#".
+const accentColor = (process.env.PROFILE_ACCENT_COLOR || "57606A").replace(
+  /^#/,
+  "",
+);
 
 // Optional: a URL to a now-playing image (for example a self-hosted novatorem
 // deployment). The section is skipped entirely when this is not configured.
@@ -38,29 +60,32 @@ const apiHeaders = {
   ...(token ? { Authorization: `Bearer ${token}` } : {}),
 };
 
-// Colors are chosen to stay legible against both the light and dark GitHub
-// themes, so near-black brand colors are replaced with lighter equivalents.
-const languageStyles = {
-  Assembly: { color: "8A6A2F" },
-  C: { color: "A8B9CC", logo: "c", logoColor: "black" },
-  "C#": { color: "512BD4", logo: "csharp" },
-  "C++": { color: "00599C", logo: "cplusplus" },
-  CSS: { color: "663399", logo: "css" },
-  Dart: { color: "0175C2", logo: "dart" },
-  Go: { color: "00ADD8", logo: "go" },
-  HTML: { color: "E34F26", logo: "html5" },
-  Java: { color: "ED8B00", logo: "openjdk" },
-  JavaScript: { color: "F7DF1E", logo: "javascript", logoColor: "black" },
-  Kotlin: { color: "7F52FF", logo: "kotlin" },
-  Lua: { color: "2C2D72", logo: "lua" },
-  Makefile: { color: "427819", logo: "gnu" },
-  PHP: { color: "777BB4", logo: "php" },
-  Python: { color: "3776AB", logo: "python" },
-  Ruby: { color: "CC342D", logo: "ruby" },
-  Rust: { color: "DEA584", logo: "rust", logoColor: "black" },
-  Shell: { color: "4EAA25", logo: "gnubash" },
-  Swift: { color: "F05138", logo: "swift" },
-  TypeScript: { color: "3178C6", logo: "typescript" },
+// Badge color when GitHub reports no color for a language.
+const fallbackLanguageColor = "8B949E";
+
+// Optional per-language logo slugs, resolved against shields.io's icon set.
+// This is a presentation nicety, not a data source: any language missing here
+// simply renders without a logo, so the table never needs to be exhaustive.
+const languageLogos = {
+  C: { logo: "c", logoColor: "black" },
+  "C#": { logo: "csharp" },
+  "C++": { logo: "cplusplus" },
+  CSS: { logo: "css" },
+  Dart: { logo: "dart" },
+  Go: { logo: "go" },
+  HTML: { logo: "html5" },
+  Java: { logo: "openjdk" },
+  JavaScript: { logo: "javascript", logoColor: "black" },
+  Kotlin: { logo: "kotlin" },
+  Lua: { logo: "lua" },
+  Makefile: { logo: "gnu" },
+  PHP: { logo: "php" },
+  Python: { logo: "python" },
+  Ruby: { logo: "ruby" },
+  Rust: { logo: "rust", logoColor: "black" },
+  Shell: { logo: "gnubash" },
+  Swift: { logo: "swift" },
+  TypeScript: { logo: "typescript" },
 };
 
 function githubApi(route) {
@@ -172,12 +197,16 @@ async function countAuthoredLines(repositories) {
   let added = 0;
   let removed = 0;
   let counted = 0;
+  let skipped = 0;
 
   // Sequential on purpose: this endpoint is expensive for GitHub to build and
   // parallel requests make the 202-retry loop far more likely to be hit.
   for (const repository of repositories) {
     const stats = await getContributorStats(repository);
-    if (!Array.isArray(stats)) continue;
+    if (!Array.isArray(stats)) {
+      skipped += 1;
+      continue;
+    }
 
     const mine = stats.find(
       (entry) =>
@@ -192,7 +221,7 @@ async function countAuthoredLines(repositories) {
     counted += 1;
   }
 
-  return { added, removed, counted };
+  return { added, removed, counted, skipped };
 }
 
 async function listPublicRepositories() {
@@ -261,6 +290,21 @@ async function getProfileGraphData() {
               }
               contributions {
                 totalCount
+              }
+            }
+          }
+          repositories(
+            first: 100
+            isFork: false
+            privacy: PUBLIC
+            ownerAffiliations: OWNER
+          ) {
+            nodes {
+              languages(first: 25) {
+                nodes {
+                  name
+                  color
+                }
               }
             }
           }
@@ -536,7 +580,7 @@ function repositoryUrl(fullName) {
 }
 
 function formatDate(value) {
-  return new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -671,8 +715,54 @@ function image(url, alt) {
   return `<img src="${escapeHtml(url)}" alt="${escapeHtml(alt)}" />`;
 }
 
-function languageBadge(language) {
-  const style = languageStyles[language.name] || { color: "555555" };
+// Some linguist colors are near-black, which disappears against the dark
+// theme. Rather than curate exceptions, lift anything below a luminance floor
+// toward white until it reads on both themes.
+function ensureReadableColor(hex, minimumLuminance = 0.22) {
+  const value = hex.padStart(6, "0").slice(0, 6);
+  let channels = [0, 2, 4].map((offset) =>
+    parseInt(value.slice(offset, offset + 2), 16),
+  );
+
+  if (channels.some(Number.isNaN)) return fallbackLanguageColor;
+
+  const luminance = () =>
+    (0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]) / 255;
+
+  // Blend toward white in small steps so the hue is preserved.
+  for (let step = 0; step < 20 && luminance() < minimumLuminance; step += 1) {
+    channels = channels.map((channel) => Math.round(channel + (255 - channel) * 0.15));
+  }
+
+  return channels
+    .map((channel) => channel.toString(16).padStart(2, "0"))
+    .join("")
+    .toUpperCase();
+}
+
+// GitHub reports each language's own linguist color, so the palette adapts to
+// whatever languages a profile actually uses instead of a fixed list.
+function buildLanguageColors(graphData) {
+  const colors = new Map();
+
+  for (const repository of graphData?.user?.repositories?.nodes || []) {
+    for (const language of repository?.languages?.nodes || []) {
+      if (!language?.name || !language.color) continue;
+      colors.set(
+        language.name,
+        ensureReadableColor(language.color.replace(/^#/, "")),
+      );
+    }
+  }
+
+  return colors;
+}
+
+function languageBadge(language, colors) {
+  const style = {
+    ...(languageLogos[language.name] || {}),
+    color: colors.get(language.name) || fallbackLanguageColor,
+  };
   const percentage =
     language.percentage < 0.1
       ? "<0.1%"
@@ -784,7 +874,7 @@ function renderContributionSvg(weeks, theme) {
     if (!firstDay) return;
     const month = new Date(`${firstDay.date}T00:00:00Z`).getUTCMonth();
     if (month !== lastMonth && weekIndex > 0) {
-      const name = new Intl.DateTimeFormat("en", {
+      const name = new Intl.DateTimeFormat(locale, {
         month: "short",
         timeZone: "UTC",
       }).format(new Date(`${firstDay.date}T00:00:00Z`));
@@ -834,7 +924,7 @@ function formatBytes(bytes) {
 }
 
 function formatNumber(value) {
-  return new Intl.NumberFormat("en").format(value);
+  return new Intl.NumberFormat(locale).format(value);
 }
 
 function pickFeaturedRepositories(graphData, repositories) {
@@ -981,9 +1071,9 @@ function renderCommitClock({ hours, total }) {
   }
 
   const offsetLabel =
-    localUtcOffsetHours >= 0
-      ? `UTC+${localUtcOffsetHours}`
-      : `UTC${localUtcOffsetHours}`;
+    localUtcOffsetHours === 0
+      ? "UTC"
+      : `UTC${localUtcOffsetHours > 0 ? "+" : ""}${localUtcOffsetHours}`;
 
   return [
     `When I push, by hour of day (${offsetLabel}, from recent public events):`,
@@ -999,7 +1089,12 @@ function renderCommitClock({ hours, total }) {
 function renderFunFacts(repositories, languages, commitClock, lineStats) {
   const facts = [];
 
-  if (lineStats.added > 0) {
+  // A partial count (rate limiting, or stats caches still building) would
+  // understate the total without any visible sign, so report nothing instead.
+  const lineStatsComplete =
+    lineStats.counted > 0 && lineStats.skipped === 0;
+
+  if (lineStatsComplete && lineStats.added > 0) {
     facts.push(`| Lines of code written | **${formatNumber(lineStats.added)}** |`);
     facts.push(`| Lines deleted | **${formatNumber(lineStats.removed)}** |`);
     facts.push(
@@ -1142,14 +1237,14 @@ function buildReadme({
   if (profile.location) {
     profileBadges.push(
       image(
-        shieldBadge(profile.location, "", "flat-square", { color: "E30A17" }),
+        shieldBadge(profile.location, "", "flat-square", { color: accentColor }),
         `Based in ${profile.location}`,
       ),
     );
   }
 
   // Add GitHub since badge
-  const joinedDate = new Intl.DateTimeFormat("en", {
+  const joinedDate = new Intl.DateTimeFormat(locale, {
     month: "short",
     year: "numeric",
     timeZone: "UTC",
@@ -1164,7 +1259,10 @@ function buildReadme({
     ),
   );
 
-  const languageBadges = languages.slice(0, 5).map(languageBadge);
+  const languageColors = buildLanguageColors(graphData);
+  const languageBadges = languages
+    .slice(0, 5)
+    .map((language) => languageBadge(language, languageColors));
   const funFacts = renderFunFacts(
     repositories,
     languages,
@@ -1291,7 +1389,8 @@ async function main() {
 
   await writeFile(outputPath, readme, "utf8");
   console.log(
-    `Line stats counted ${lineStats.counted}/${repositories.length} repositories.`,
+    `Line stats counted ${lineStats.counted}/${repositories.length} repositories` +
+      `${lineStats.skipped > 0 ? ` (${lineStats.skipped} unavailable, totals hidden)` : ""}.`,
   );
   console.log(`Generated ${path.relative(process.cwd(), outputPath)} for ${username}.`);
 }

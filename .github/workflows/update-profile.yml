@@ -35,9 +35,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROFILE_USERNAME: ${{ github.repository_owner }}
-          PROFILE_UTC_OFFSET: "3"
-          # Optional: set these as repository variables to show a now-playing
-          # badge. The section is omitted when they are empty.
+          # Every value below is optional and read from repository variables,
+          # so a fork works unchanged. Set them under
+          # Settings > Secrets and variables > Actions > Variables.
+          #
+          #   PROFILE_UTC_OFFSET   hours from UTC for the commit clock (e.g. 3)
+          #   PROFILE_LOCALE       date and number formatting (e.g. en, tr)
+          #   PROFILE_ACCENT_COLOR hex for the location badge, no leading "#"
+          #   SPOTIFY_STATUS_URL   now-playing image; section hidden if unset
+          #   SPOTIFY_PROFILE_URL  link target for the now-playing badge
+          PROFILE_UTC_OFFSET: ${{ vars.PROFILE_UTC_OFFSET }}
+          PROFILE_LOCALE: ${{ vars.PROFILE_LOCALE }}
+          PROFILE_ACCENT_COLOR: ${{ vars.PROFILE_ACCENT_COLOR }}
           SPOTIFY_STATUS_URL: ${{ vars.SPOTIFY_STATUS_URL }}
           SPOTIFY_PROFILE_URL: ${{ vars.SPOTIFY_PROFILE_URL }}
 

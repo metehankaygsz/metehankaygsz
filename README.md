@@ -12,7 +12,7 @@
   <p>
     <a href="https://github.com/metehankaygsz?tab=followers"><img src="https://img.shields.io/github/followers/metehankaygsz?style=flat-square&label=Followers&color=0969da" alt="GitHub followers" /></a>
     <a href="https://github.com/metehankaygsz?tab=repositories"><img src="https://img.shields.io/github/stars/metehankaygsz?affiliations=OWNER&style=flat-square&label=Stars&color=0969da" alt="GitHub stars" /></a>
-    <img src="https://img.shields.io/badge/Ankara-E30A17?style=flat-square" alt="Based in Ankara" />
+    <img src="https://img.shields.io/badge/Ankara-57606A?style=flat-square" alt="Based in Ankara" />
     <img src="https://img.shields.io/badge/GitHub%20since-May%202020-57606A?style=flat-square&amp;logo=github" alt="GitHub member since May 2020" />
   </p>
 </div>
@@ -98,14 +98,14 @@
 | Code across public repositories | **822 KB** |
 | Most-used license | **MIT** (2 repositories) |
 | Longest-lived project | **reboottopayloadswitch** (6.3 years) |
-| Busiest pushing hour | **14:00** |
+| Busiest pushing hour | **11:00** |
 
 ## Commit Clock
 
-When I push, by hour of day (UTC+3, from recent public events):
+When I push, by hour of day (UTC, from recent public events):
 
 ```text
-           ▄ ▄█▅▄▆▄▂▇▃  
+        ▄ ▄█▅▄▆▄▂▇▃     
 |     |     |     |     
 00    06    12    18    
 ```
@@ -115,10 +115,10 @@ When I push, by hour of day (UTC+3, from recent public events):
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-29.2%25-3776AB?style=flat-square&amp;logo=python" alt="Python 29.2%" />
-  <img src="https://img.shields.io/badge/Kotlin-20.0%25-7F52FF?style=flat-square&amp;logo=kotlin" alt="Kotlin 20.0%" />
-  <img src="https://img.shields.io/badge/C%23-15.5%25-512BD4?style=flat-square&amp;logo=csharp" alt="C# 15.5%" />
-  <img src="https://img.shields.io/badge/HTML-14.8%25-E34F26?style=flat-square&amp;logo=html5" alt="HTML 14.8%" />
+  <img src="https://img.shields.io/badge/Python-29.2%25-3572A5?style=flat-square&amp;logo=python" alt="Python 29.2%" />
+  <img src="https://img.shields.io/badge/Kotlin-20.0%25-A97BFF?style=flat-square&amp;logo=kotlin" alt="Kotlin 20.0%" />
+  <img src="https://img.shields.io/badge/C%23-15.5%25-178600?style=flat-square&amp;logo=csharp" alt="C# 15.5%" />
+  <img src="https://img.shields.io/badge/HTML-14.8%25-E34C26?style=flat-square&amp;logo=html5" alt="HTML 14.8%" />
   <img src="https://img.shields.io/badge/TypeScript-12.2%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 12.2%" />
 </p>
 
