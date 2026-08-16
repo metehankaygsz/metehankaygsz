@@ -63,22 +63,6 @@ const languageStyles = {
   TypeScript: { color: "3178C6", logo: "typescript" },
 };
 
-const technologyStyles = {
-  ".NET": { color: "512BD4", logo: "dotnet" },
-  Docker: { color: "2496ED", logo: "docker" },
-  FastAPI: { color: "009688", logo: "fastapi" },
-  "GitHub Actions": { color: "2088FF", logo: "githubactions" },
-  "GNU Make": { color: "427819", logo: "gnu" },
-  "Node.js": { color: "5FA04E", logo: "nodedotjs" },
-  OpenAI: { color: "412991", logo: "openai" },
-  Pytest: { color: "0A9EDC", logo: "pytest" },
-  React: { color: "149ECA", logo: "react", logoColor: "white" },
-  SDL2: { color: "173B6C" },
-  SQLAlchemy: { color: "D71F00", logo: "sqlalchemy" },
-  Tailwind: { color: "06B6D4", logo: "tailwindcss" },
-  Vite: { color: "646CFF", logo: "vite" },
-};
-
 function githubApi(route) {
   return `https://api.github.com${route}`;
 }
@@ -340,133 +324,6 @@ function cleanMarkdownText(value) {
     .trim();
 }
 
-function encodeRepositoryPath(repositoryPath) {
-  return repositoryPath.split("/").map(encodeURIComponent).join("/");
-}
-
-async function getRepositoryTree(repository) {
-  const branch = encodeURIComponent(repository.default_branch);
-  return (
-    (await getOptionalJson(
-      `/repos/${repository.full_name}/git/trees/${branch}?recursive=1`,
-      { tree: [] },
-    ))?.tree || []
-  );
-}
-
-async function readRepositoryFile(repository, filePath) {
-  try {
-    const response = await request(
-      githubApi(
-        `/repos/${repository.full_name}/contents/${encodeRepositoryPath(filePath)}?ref=${encodeURIComponent(repository.default_branch)}`,
-      ),
-      { headers: { Accept: "application/vnd.github.raw+json" } },
-    );
-    return await response.text();
-  } catch {
-    return "";
-  }
-}
-
-function packageNamesFromJson(contents) {
-  try {
-    const manifest = JSON.parse(contents);
-    return new Set([
-      ...Object.keys(manifest.dependencies || {}),
-      ...Object.keys(manifest.devDependencies || {}),
-      ...Object.keys(manifest.peerDependencies || {}),
-    ]);
-  } catch {
-    return new Set();
-  }
-}
-
-async function detectTechnologies(repositories) {
-  const technologies = new Set();
-  const candidates = [...repositories]
-    .sort(
-      (left, right) =>
-        new Date(right.pushed_at || right.updated_at) -
-        new Date(left.pushed_at || left.updated_at),
-    )
-    .slice(0, 8);
-
-  for (const repository of candidates) {
-    const tree = await getRepositoryTree(repository);
-    const paths = tree
-      .filter((entry) => entry.type === "blob")
-      .map((entry) => entry.path);
-    const lowerPaths = paths.map((entry) => entry.toLowerCase());
-
-    if (lowerPaths.some((entry) => entry.endsWith("/dockerfile") || entry === "dockerfile")) {
-      technologies.add("Docker");
-    }
-    if (lowerPaths.some((entry) => entry.startsWith(".github/workflows/"))) {
-      technologies.add("GitHub Actions");
-    }
-    if (lowerPaths.some((entry) => entry.endsWith(".csproj") || entry.endsWith(".sln"))) {
-      technologies.add(".NET");
-    }
-    if (lowerPaths.some((entry) => /(^|\/)makefile$/.test(entry))) {
-      technologies.add("GNU Make");
-    }
-    if (
-      lowerPaths.some(
-        (entry) =>
-          entry.endsWith("vite.config.js") ||
-          entry.endsWith("vite.config.ts") ||
-          entry.endsWith("vite.config.mjs"),
-      )
-    ) {
-      technologies.add("Vite");
-    }
-    if (
-      lowerPaths.some(
-        (entry) =>
-          entry.endsWith("tailwind.config.js") ||
-          entry.endsWith("tailwind.config.ts") ||
-          entry.endsWith("tailwind.config.cjs"),
-      )
-    ) {
-      technologies.add("Tailwind");
-    }
-
-    const manifestPaths = paths
-      .filter((entry) => {
-        const lower = entry.toLowerCase();
-        return (
-          lower.endsWith("package.json") ||
-          /(^|\/)requirements[^/]*\.txt$/.test(lower) ||
-          lower.endsWith("pyproject.toml") ||
-          /(^|\/)makefile$/.test(lower)
-        );
-      })
-      .slice(0, 12);
-
-    for (const manifestPath of manifestPaths) {
-      const contents = await readRepositoryFile(repository, manifestPath);
-      const lowerContents = contents.toLowerCase();
-
-      if (manifestPath.toLowerCase().endsWith("package.json")) {
-        technologies.add("Node.js");
-        const packages = packageNamesFromJson(contents);
-
-        if (packages.has("react")) technologies.add("React");
-        if (packages.has("vite")) technologies.add("Vite");
-        if (packages.has("tailwindcss")) technologies.add("Tailwind");
-      }
-
-      if (/\bfastapi\b/.test(lowerContents)) technologies.add("FastAPI");
-      if (/\bopenai\b/.test(lowerContents)) technologies.add("OpenAI");
-      if (/\bsqlalchemy\b/.test(lowerContents)) technologies.add("SQLAlchemy");
-      if (/\bpytest\b/.test(lowerContents)) technologies.add("Pytest");
-      if (/\bsdl2\b/.test(lowerContents)) technologies.add("SDL2");
-    }
-  }
-
-  return [...technologies].sort((left, right) => left.localeCompare(right));
-}
-
 function extractAttribute(tag, attribute) {
   return decodeHtml(
     tag.match(new RegExp(`\\b${attribute}="([^"]*)"`, "i"))?.[1] || "",
@@ -670,20 +527,8 @@ function languageBadge(language) {
   );
 }
 
-function technologyBadge(name) {
-  const style = technologyStyles[name] || { color: "555555" };
-  return image(shieldBadge(name, "", "for-the-badge", style), name);
-}
-
 function renderBadges(badges, indent = "  ") {
   return `<p>\n${badges.map((badge) => `${indent}${badge}`).join("\n")}\n</p>`;
-}
-
-function formatJoinedList(values) {
-  if (values.length === 0) return "";
-  if (values.length === 1) return values[0];
-  if (values.length === 2) return `${values[0]} and ${values[1]}`;
-  return `${values.slice(0, -1).join(", ")}, and ${values.at(-1)}`;
 }
 
 function renderAchievements(achievements) {
@@ -1119,7 +964,6 @@ function buildReadme({
   repositories,
   graphData,
   languages,
-  technologies,
   achievements,
   activity,
   featured,
@@ -1164,7 +1008,6 @@ function buildReadme({
   );
 
   const languageBadges = languages.slice(0, 5).map(languageBadge);
-  const technologyBadges = technologies.map(technologyBadge);
   const funFacts = renderFunFacts(
     repositories,
     languages,
@@ -1224,14 +1067,6 @@ ${renderBadges(languageBadges)}
 
 ${renderLanguageBar(languages)}
 
-## Toolkits
-
-${
-  technologyBadges.length > 0
-    ? renderBadges(technologyBadges)
-    : "Tooling will appear here as it is detected in public repositories."
-}
-
 ## GitHub Achievements
 
 ${renderAchievements(achievements)}
@@ -1270,7 +1105,6 @@ async function main() {
   );
   const repositories = await attachLanguages(originalRepositories);
   const languages = aggregateLanguages(repositories);
-  const technologies = await detectTechnologies(repositories);
   const featured = pickFeaturedRepositories(graphData, repositories);
   const hasContributionGraph = await writeContributionGraphs(graphData);
   const lineStats = await countAuthoredLines(repositories);
@@ -1279,7 +1113,6 @@ async function main() {
     repositories,
     graphData,
     languages,
-    technologies,
     achievements,
     activity,
     featured,

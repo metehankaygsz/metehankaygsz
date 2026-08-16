@@ -126,23 +126,6 @@ CSS         █░░░░░░░░░░░░░░░░░░░░░�
 C           █░░░░░░░░░░░░░░░░░░░░░░░░░░░   1.0%
 ```
 
-## Toolkits
-
-<p>
-  <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&amp;logo=dotnet" alt=".NET" />
-  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&amp;logo=fastapi" alt="FastAPI" />
-  <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&amp;logo=githubactions" alt="GitHub Actions" />
-  <img src="https://img.shields.io/badge/GNU%20Make-427819?style=for-the-badge&amp;logo=gnu" alt="GNU Make" />
-  <img src="https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&amp;logo=nodedotjs" alt="Node.js" />
-  <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&amp;logo=openai" alt="OpenAI" />
-  <img src="https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&amp;logo=pytest" alt="Pytest" />
-  <img src="https://img.shields.io/badge/React-149ECA?style=for-the-badge&amp;logo=react&amp;logoColor=white" alt="React" />
-  <img src="https://img.shields.io/badge/SDL2-173B6C?style=for-the-badge" alt="SDL2" />
-  <img src="https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&amp;logo=sqlalchemy" alt="SQLAlchemy" />
-  <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&amp;logo=tailwindcss" alt="Tailwind" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&amp;logo=vite" alt="Vite" />
-</p>
-
 ## GitHub Achievements
 
 <div align="center">
