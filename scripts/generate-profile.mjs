@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,6 +6,7 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..");
 const outputPath = path.join(repositoryRoot, "README.md");
 const nowSectionPath = path.join(repositoryRoot, "WHATS_NEW.md");
+const assetsDirectory = path.join(repositoryRoot, "assets");
 
 // Hour-of-day stats are reported in this offset so the histogram matches the
 // author's own clock rather than UTC.
@@ -167,6 +168,12 @@ async function getProfileGraphData() {
           contributionsCollection(from: $from, to: $to) {
             contributionCalendar {
               totalContributions
+              weeks {
+                contributionDays {
+                  contributionCount
+                  date
+                }
+              }
             }
             totalCommitContributions
             totalIssueContributions
@@ -643,6 +650,110 @@ function renderRecentActivity(activity) {
     .join("\n");
 }
 
+// GitHub's own contribution-grid palettes, darkest step last.
+const contributionPalettes = {
+  light: {
+    empty: "#ebedf0",
+    levels: ["#9be9a8", "#40c463", "#30a14e", "#216e39"],
+    text: "#57606a",
+  },
+  dark: {
+    empty: "#161b22",
+    levels: ["#0e4429", "#006d32", "#26a641", "#39d353"],
+    text: "#8b949e",
+  },
+};
+
+function contributionLevel(count, max) {
+  if (count <= 0) return 0;
+  if (max <= 0) return 0;
+  // Four filled steps, matching the granularity GitHub itself renders.
+  return Math.min(4, Math.ceil((count / max) * 4));
+}
+
+function renderContributionSvg(weeks, theme) {
+  const palette = contributionPalettes[theme];
+  const cell = 11;
+  const gap = 3;
+  const pitch = cell + gap;
+  const topMargin = 20;
+  const leftMargin = 4;
+
+  const counts = weeks.flatMap((week) =>
+    week.contributionDays.map((day) => day.contributionCount),
+  );
+  const max = Math.max(1, ...counts);
+
+  const width = leftMargin * 2 + weeks.length * pitch - gap;
+  const height = topMargin + 7 * pitch - gap + 4;
+
+  const squares = [];
+  const monthLabels = [];
+  let lastMonth = null;
+
+  weeks.forEach((week, weekIndex) => {
+    week.contributionDays.forEach((day) => {
+      const date = new Date(`${day.date}T00:00:00Z`);
+      const dayIndex = date.getUTCDay();
+      const level = contributionLevel(day.contributionCount, max);
+      const fill = level === 0 ? palette.empty : palette.levels[level - 1];
+      const x = leftMargin + weekIndex * pitch;
+      const y = topMargin + dayIndex * pitch;
+
+      squares.push(
+        `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2" ry="2" fill="${fill}"><title>${day.contributionCount} on ${day.date}</title></rect>`,
+      );
+    });
+
+    // Label a month at the first week that lands in it, skipping the first
+    // column so a partial leading week does not push a label off the edge.
+    const firstDay = week.contributionDays[0];
+    if (!firstDay) return;
+    const month = new Date(`${firstDay.date}T00:00:00Z`).getUTCMonth();
+    if (month !== lastMonth && weekIndex > 0) {
+      const name = new Intl.DateTimeFormat("en", {
+        month: "short",
+        timeZone: "UTC",
+      }).format(new Date(`${firstDay.date}T00:00:00Z`));
+      monthLabels.push(
+        `<text x="${leftMargin + weekIndex * pitch}" y="12" fill="${palette.text}" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif">${name}</text>`,
+      );
+    }
+    lastMonth = month;
+  });
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Contribution graph for the last year">
+${monthLabels.join("\n")}
+${squares.join("\n")}
+</svg>
+`;
+}
+
+async function writeContributionGraphs(graphData) {
+  const weeks =
+    graphData?.user?.contributionsCollection?.contributionCalendar?.weeks || [];
+
+  // Without a token the calendar is unavailable; leave any previously
+  // generated files in place rather than blanking the section.
+  if (weeks.length === 0) return false;
+
+  await mkdir(assetsDirectory, { recursive: true });
+  await Promise.all([
+    writeFile(
+      path.join(assetsDirectory, "contribution-graph.svg"),
+      renderContributionSvg(weeks, "light"),
+      "utf8",
+    ),
+    writeFile(
+      path.join(assetsDirectory, "contribution-graph-dark.svg"),
+      renderContributionSvg(weeks, "dark"),
+      "utf8",
+    ),
+  ]);
+
+  return true;
+}
+
 function formatBytes(bytes) {
   if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   if (bytes >= 1024) return `${Math.round(bytes / 1024)} KB`;
@@ -701,9 +812,14 @@ function renderFeaturedProjects(featured) {
       .filter(Boolean)
       .join(" · ");
 
+    // Repositories without a description simply omit the line rather than
+    // padding the cell with an empty row.
+    const description = project.description
+      ? `\n        ${escapeHtml(project.description)}<br />`
+      : "";
+
     return `      <td width="50%" valign="top">
-        <a href="${escapeHtml(project.url)}"><strong>${escapeHtml(project.name)}</strong></a><br />
-        ${escapeHtml(project.description || "No description yet.")}<br />
+        <a href="${escapeHtml(project.url)}"><strong>${escapeHtml(project.name)}</strong></a><br />${description}
         <sub>${meta}</sub>
       </td>`;
   };
@@ -929,12 +1045,11 @@ function buildReadme({
   featured,
   commitClock,
   nowSection,
+  hasContributionGraph,
 }) {
   const displayName = escapeHtml(profile.name || profile.login);
-  const bio = cleanMarkdownText(
-    profile.bio || graphData?.user?.bio || "",
-  );
-  const tagline = bio || "Building things, mostly in public.";
+  // Only shown when there is a real bio to show — no invented filler.
+  const tagline = cleanMarkdownText(profile.bio || graphData?.user?.bio || "");
 
   const profileBadges = [
     `<a href="https://github.com/${username}?tab=followers"><img src="https://img.shields.io/github/followers/${username}?style=flat-square&label=Followers&color=0969da" alt="GitHub followers" /></a>`,
@@ -980,15 +1095,14 @@ function buildReadme({
   return `<!--
   This file is generated by scripts/generate-profile.mjs.
   Edit the generator, not README.md. The scheduled workflow only commits when data changes.
-  Prose for the "Now" section lives in WHATS_NEW.md and is inlined here.
+  Optional: create a WHATS_NEW.md and its contents are inlined as a "Now" section.
 -->
 
 <div align="center">
 
   <h1>${displayName}</h1>
 
-  <p><em>${escapeHtml(tagline)}</em></p>
-
+${tagline ? `  <p><em>${escapeHtml(tagline)}</em></p>\n` : ""}
   <p>
     ${profileBadges.join("\n    ")}
   </p>
@@ -998,17 +1112,21 @@ function buildReadme({
 
 ${renderFeaturedProjects(featured)}
 ${optionalSection("Now", nowSection)}
-## Contribution Graph
+${
+  hasContributionGraph
+    ? `## Contribution Graph
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${username}/${username}/output/github-snake-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/${username}/${username}/output/github-snake.svg" />
-    <img src="https://raw.githubusercontent.com/${username}/${username}/output/github-snake.svg" alt="Contribution graph animation" />
+    <source media="(prefers-color-scheme: dark)" srcset="assets/contribution-graph-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="assets/contribution-graph.svg" />
+    <img src="assets/contribution-graph.svg" alt="Contribution graph for the last year" />
   </picture>
 </div>
 
-## GitHub Snapshot
+`
+    : ""
+}## GitHub Snapshot
 
 ${renderStats(profile, repositories, graphData)}
 ${optionalSection("By the Numbers", funFacts)}${optionalSection("Commit Clock", commitClockChart)}
@@ -1068,6 +1186,7 @@ async function main() {
   const languages = aggregateLanguages(repositories);
   const technologies = await detectTechnologies(repositories);
   const featured = pickFeaturedRepositories(graphData, repositories);
+  const hasContributionGraph = await writeContributionGraphs(graphData);
   const readme = buildReadme({
     profile,
     repositories,
@@ -1079,6 +1198,7 @@ async function main() {
     featured,
     commitClock,
     nowSection,
+    hasContributionGraph,
   });
 
   await writeFile(outputPath, readme, "utf8");

@@ -44,13 +44,15 @@ jobs:
       - name: Commit changed profile data
         shell: bash
         run: |
-          if git diff --quiet -- README.md; then
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md assets
+
+          # Staging first so newly generated, still-untracked SVGs are seen.
+          if git diff --cached --quiet; then
             echo "Profile data has not changed."
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
           git commit -m "chore: refresh profile README"
           git push
