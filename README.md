@@ -23,7 +23,7 @@
 | Original public projects | **10** |
 | Followers | **10** |
 | Stars on original repositories | **11** |
-| Contributions in the last 12 months | **108** |
+| Contributions in the last 12 months | **112** |
 
 ## Languages
 
@@ -64,6 +64,13 @@ Automatically calculated from GitHub's language data for my current public, non-
 <div align="center">
   <table>
     <tr>
+      <td align="center" width="180">
+        <a href="https://github.com/metehankaygsz?achievement=yolo&amp;tab=achievements">
+          <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="80" alt="YOLO achievement" />
+          <br />
+          <strong>YOLO</strong>
+        </a>
+      </td>
       <td align="center" width="180">
         <a href="https://github.com/metehankaygsz?achievement=pull-shark&amp;tab=achievements">
           <img src="https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png" width="80" alt="Pull Shark achievement" />
