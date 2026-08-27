@@ -11,7 +11,6 @@
 <text x="578" y="12" fill="#8b949e" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif">Jun</text>
 <text x="634" y="12" fill="#8b949e" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif">Jul</text>
 <text x="690" y="12" fill="#8b949e" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif">Aug</text>
-<rect x="4" y="48" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2025-08-26</title></rect>
 <rect x="4" y="62" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2025-08-27</title></rect>
 <rect x="4" y="76" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2025-08-28</title></rect>
 <rect x="4" y="90" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2025-08-29</title></rect>
@@ -377,4 +376,5 @@
 <rect x="732" y="34" width="11" height="11" rx="2" ry="2" fill="#0e4429"><title>2 on 2026-08-24</title></rect>
 <rect x="732" y="48" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2026-08-25</title></rect>
 <rect x="732" y="62" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2026-08-26</title></rect>
+<rect x="732" y="76" width="11" height="11" rx="2" ry="2" fill="#161b22"><title>0 on 2026-08-27</title></rect>
 </svg>

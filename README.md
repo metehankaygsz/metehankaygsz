@@ -24,7 +24,7 @@
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/dashline"><strong>dashline</strong></a><br />
         A minimal Android launcher for car head units — clock, weather, media controls and app shortcuts. Works down to Android 4.4, no Google Play Services required.<br />
-        <sub>Kotlin · ★ 8 · ⑂ 1</sub>
+        <sub>Kotlin · ★ 11 · ⑂ 1</sub>
       </td>
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/bcm94360cd-linux"><strong>bcm94360cd-linux</strong></a><br />
@@ -60,10 +60,10 @@
 | Repository | My contributions | Stars |
 | --- | --- | ---: |
 | [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs · 12 commits | ★ 1 |
-| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,235 |
-| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 917 |
-| [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 332 |
-| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 253 |
+| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,238 |
+| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 916 |
+| [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 333 |
+| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 255 |
 
 ## Contribution Graph
 
@@ -82,7 +82,7 @@
 | Public repositories | **16** |
 | Original public projects | **10** |
 | Followers | **10** |
-| Stars on original repositories | **14** |
+| Stars on original repositories | **17** |
 | Contributions in the last 12 months | **134** |
 | — commits | **81** |
 | — pull requests | **13** |
@@ -118,7 +118,7 @@ Automatically calculated from GitHub's language data for my current public, non-
 <p>
   <img src="https://img.shields.io/badge/Python-27.5%25-3572A5?style=flat-square&amp;logo=python" alt="Python 27.5%" />
   <img src="https://img.shields.io/badge/Kotlin-24.7%25-A97BFF?style=flat-square&amp;logo=kotlin" alt="Kotlin 24.7%" />
-  <img src="https://img.shields.io/badge/C%23-14.6%25-178600?style=flat-square&amp;logo=csharp" alt="C# 14.6%" />
+  <img src="https://img.shields.io/badge/C%23-14.6%25-7355DD?style=flat-square&amp;logo=csharp" alt="C# 14.6%" />
   <img src="https://img.shields.io/badge/HTML-13.9%25-E34C26?style=flat-square&amp;logo=html5" alt="HTML 13.9%" />
   <img src="https://img.shields.io/badge/TypeScript-11.5%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 11.5%" />
 </p>
@@ -182,14 +182,14 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 
 ## Recent Public Activity
 
+- **Aug 27, 2026:** Commented on [issue #2171](https://github.com/ubuntu/app-center/pull/2171) in [ubuntu/app-center](https://github.com/ubuntu/app-center)
 - **Aug 24, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 - **Aug 22, 2026:** Opened [pull request #2171](https://github.com/ubuntu/app-center/pull/2171) in [ubuntu/app-center](https://github.com/ubuntu/app-center)
 - **Aug 22, 2026:** Created branch `fix/updates-blocked-by-appstream-parse-failure` in [metehankaygsz/app-center](https://github.com/metehankaygsz/app-center)
 - **Aug 22, 2026:** Forked [ubuntu/app-center](https://github.com/ubuntu/app-center) to [metehankaygsz/app-center](https://github.com/metehankaygsz/app-center)
-- **Aug 16, 2026:** Pushed updates to [metehankaygsz/metehankaygsz](https://github.com/metehankaygsz/metehankaygsz)
 
 ---
 
 <div align="center">
-  <sub>Updated automatically · Aug 26, 2026</sub>
+  <sub>Updated automatically · Aug 27, 2026</sub>
 </div>
