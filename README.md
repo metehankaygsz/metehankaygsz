@@ -61,7 +61,7 @@
 | --- | --- | ---: |
 | [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs · 12 commits | ★ 1 |
 | [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,239 |
-| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 916 |
+| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 917 |
 | [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 334 |
 | [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 257 |
 
@@ -191,5 +191,5 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 ---
 
 <div align="center">
-  <sub>Updated automatically · Aug 28, 2026</sub>
+  <sub>Updated automatically · Aug 29, 2026</sub>
 </div>
