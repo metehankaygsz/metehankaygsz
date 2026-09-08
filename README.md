@@ -24,7 +24,7 @@
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/dashline"><strong>dashline</strong></a><br />
         A minimal Android launcher for car head units — clock, weather, media controls and app shortcuts. Works down to Android 4.4, no Google Play Services required.<br />
-        <sub>Kotlin · ★ 14 · ⑂ 1</sub>
+        <sub>Kotlin · ★ 16 · ⑂ 1</sub>
       </td>
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/bcm94360cd-linux"><strong>bcm94360cd-linux</strong></a><br />
@@ -82,9 +82,9 @@
 | Public repositories | **16** |
 | Original public projects | **10** |
 | Followers | **11** |
-| Stars on original repositories | **20** |
-| Contributions in the last 12 months | **134** |
-| — commits | **81** |
+| Stars on original repositories | **22** |
+| Contributions in the last 12 months | **138** |
+| — commits | **85** |
 | — pull requests | **13** |
 | — code reviews | **0** |
 | — issues | **2** |
@@ -93,10 +93,10 @@
 
 | Detail | Value |
 | --- | ---: |
-| Lines of code written | **35,822** |
-| Lines deleted | **5,157** |
-| Net lines standing | **30,665** |
-| Code across public repositories | **872 KB** |
+| Lines of code written | **36,128** |
+| Lines deleted | **5,228** |
+| Net lines standing | **30,900** |
+| Code across public repositories | **881 KB** |
 | Most-used license | **GPL-3.0** (1 repositories) |
 | Longest-lived project | **reboottopayloadswitch** (6.3 years) |
 | Busiest pushing hour | **11:00** |
@@ -106,7 +106,7 @@
 When I push, by hour of day (UTC, from recent public events):
 
 ```text
-      ▃▅▅ ▄█▅▅▄         
+      ▃▅▅ ▄█▅▅▅         
 |     |     |     |     
 00    06    12    18    
 ```
@@ -116,24 +116,24 @@ When I push, by hour of day (UTC, from recent public events):
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-27.5%25-3572A5?style=flat-square&amp;logo=python" alt="Python 27.5%" />
-  <img src="https://img.shields.io/badge/Kotlin-24.7%25-A97BFF?style=flat-square&amp;logo=kotlin" alt="Kotlin 24.7%" />
-  <img src="https://img.shields.io/badge/C%23-14.6%25-7355DD?style=flat-square&amp;logo=csharp" alt="C# 14.6%" />
-  <img src="https://img.shields.io/badge/HTML-13.9%25-E34C26?style=flat-square&amp;logo=html5" alt="HTML 13.9%" />
-  <img src="https://img.shields.io/badge/TypeScript-11.5%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 11.5%" />
+  <img src="https://img.shields.io/badge/Python-27.2%25-3572A5?style=flat-square&amp;logo=python" alt="Python 27.2%" />
+  <img src="https://img.shields.io/badge/Kotlin-25.4%25-A97BFF?style=flat-square&amp;logo=kotlin" alt="Kotlin 25.4%" />
+  <img src="https://img.shields.io/badge/C%23-14.4%25-7355DD?style=flat-square&amp;logo=csharp" alt="C# 14.4%" />
+  <img src="https://img.shields.io/badge/HTML-13.8%25-E34C26?style=flat-square&amp;logo=html5" alt="HTML 13.8%" />
+  <img src="https://img.shields.io/badge/TypeScript-11.3%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 11.3%" />
 </p>
 
 ```text
-Python      ████████░░░░░░░░░░░░░░░░░░░░  27.5%
-Kotlin      ███████░░░░░░░░░░░░░░░░░░░░░  24.7%
-C#          ████░░░░░░░░░░░░░░░░░░░░░░░░  14.6%
-HTML        ████░░░░░░░░░░░░░░░░░░░░░░░░  13.9%
-TypeScript  ███░░░░░░░░░░░░░░░░░░░░░░░░░  11.5%
+Python      ████████░░░░░░░░░░░░░░░░░░░░  27.2%
+Kotlin      ███████░░░░░░░░░░░░░░░░░░░░░  25.4%
+C#          ████░░░░░░░░░░░░░░░░░░░░░░░░  14.4%
+HTML        ████░░░░░░░░░░░░░░░░░░░░░░░░  13.8%
+TypeScript  ███░░░░░░░░░░░░░░░░░░░░░░░░░  11.3%
 C++         █░░░░░░░░░░░░░░░░░░░░░░░░░░░   2.0%
 Assembly    █░░░░░░░░░░░░░░░░░░░░░░░░░░░   1.5%
 Shell       █░░░░░░░░░░░░░░░░░░░░░░░░░░░   1.5%
 CSS         █░░░░░░░░░░░░░░░░░░░░░░░░░░░   1.0%
-C           █░░░░░░░░░░░░░░░░░░░░░░░░░░░   1.0%
+C           █░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.9%
 ```
 
 ## GitHub Achievements
@@ -141,6 +141,13 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 <div align="center">
   <table>
     <tr>
+      <td align="center" width="180">
+        <a href="https://github.com/metehankaygsz?achievement=starstruck&amp;tab=achievements">
+          <img src="https://github.githubassets.com/assets/starstruck-default-b6610abad518.png" width="80" alt="Starstruck achievement" />
+          <br />
+          <strong>Starstruck</strong>
+        </a>
+      </td>
       <td align="center" width="180">
         <a href="https://github.com/metehankaygsz?achievement=yolo&amp;tab=achievements">
           <img src="https://github.githubassets.com/assets/yolo-default-be0bbff04951.png" width="80" alt="YOLO achievement" />
@@ -182,14 +189,14 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 
 ## Recent Public Activity
 
+- **Sep 7, 2026:** Closed [issue #1](https://github.com/metehankaygsz/dashline/issues/1) in [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
+- **Sep 7, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
+- **Sep 7, 2026:** Labeled [issue #1](https://github.com/metehankaygsz/dashline/issues/1) in [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
+- **Sep 7, 2026:** Assigned [issue #1](https://github.com/metehankaygsz/dashline/issues/1) in [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 - **Sep 7, 2026:** Commented on [issue #1](https://github.com/metehankaygsz/dashline/issues/1) in [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
-- **Sep 5, 2026:** Starred [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)
-- **Aug 28, 2026:** Commented on [issue #2171](https://github.com/ubuntu/app-center/pull/2171) in [ubuntu/app-center](https://github.com/ubuntu/app-center)
-- **Aug 27, 2026:** Pushed updates to [metehankaygsz/app-center](https://github.com/metehankaygsz/app-center)
-- **Aug 24, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 
 ---
 
 <div align="center">
-  <sub>Updated automatically · Sep 7, 2026</sub>
+  <sub>Updated automatically · Sep 8, 2026</sub>
 </div>
