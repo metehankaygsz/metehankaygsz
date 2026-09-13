@@ -25,7 +25,7 @@
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/dashline"><strong>dashline</strong></a><br />
         A minimal Android launcher for car head units — clock, weather, media controls and app shortcuts. Works down to Android 4.4, no Google Play Services required.<br />
-        <sub>Kotlin · ★ 18 · ⑂ 1</sub>
+        <sub>Kotlin · ★ 19 · ⑂ 1</sub>
       </td>
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/bcm94360cd-linux"><strong>bcm94360cd-linux</strong></a><br />
@@ -83,7 +83,7 @@
 | Public repositories | **16** |
 | Original public projects | **10** |
 | Followers | **11** |
-| Stars on original repositories | **24** |
+| Stars on original repositories | **25** |
 | Contributions in the last 12 months | **138** |
 | — commits | **85** |
 | — pull requests | **13** |
@@ -99,7 +99,7 @@
 | Net lines standing | **30,900** |
 | Code across public repositories | **881 KB** |
 | Most-used license | **GPL-3.0** (1 repositories) |
-| Longest-lived project | **reboottopayloadswitch** (6.3 years) |
+| Longest-lived project | **reboottopayloadswitch** (6.4 years) |
 | Busiest pushing hour | **11:00** |
 
 ## Commit Clock
@@ -199,5 +199,5 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 ---
 
 <div align="center">
-  <sub>Updated automatically · Sep 12, 2026</sub>
+  <sub>Updated automatically · Sep 13, 2026</sub>
 </div>
