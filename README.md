@@ -61,10 +61,10 @@
 | Repository | My contributions | Stars |
 | --- | --- | ---: |
 | [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs · 12 commits | ★ 1 |
-| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,262 |
+| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,264 |
 | [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 920 |
 | [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 335 |
-| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 269 |
+| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 270 |
 
 ## Contribution Graph
 
@@ -94,9 +94,6 @@
 
 | Detail | Value |
 | --- | ---: |
-| Lines of code written | **36,128** |
-| Lines deleted | **5,228** |
-| Net lines standing | **30,900** |
 | Code across public repositories | **881 KB** |
 | Most-used license | **GPL-3.0** (1 repositories) |
 | Longest-lived project | **reboottopayloadswitch** (6.4 years) |
@@ -199,5 +196,5 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 ---
 
 <div align="center">
-  <sub>Updated automatically · Sep 14, 2026</sub>
+  <sub>Updated automatically · Sep 15, 2026</sub>
 </div>
