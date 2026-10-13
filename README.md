@@ -25,7 +25,7 @@
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/dashline"><strong>dashline</strong></a><br />
         A minimal Android launcher for car head units — clock, weather, media controls and app shortcuts. Works down to Android 4.4, no Google Play Services required.<br />
-        <sub>Kotlin · ★ 27 · ⑂ 2</sub>
+        <sub>Kotlin · ★ 27 · ⑂ 3</sub>
       </td>
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/bcm94360cd-linux"><strong>bcm94360cd-linux</strong></a><br />
@@ -60,11 +60,21 @@
 
 | Repository | My contributions | Stars |
 | --- | --- | ---: |
-| [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs |  |
-| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests |  |
-| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request |  |
-| [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request |  |
-| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request |  |
+| [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs · 12 commits | ★ 1 |
+| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,293 |
+| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 929 |
+| [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 338 |
+| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 305 |
+
+## Contribution Graph
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/contribution-graph-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="assets/contribution-graph.svg" />
+    <img src="assets/contribution-graph.svg" alt="Contribution graph for the last year" />
+  </picture>
+</div>
 
 ## GitHub Snapshot
 
@@ -74,6 +84,11 @@
 | Original public projects | **10** |
 | Followers | **12** |
 | Stars on original repositories | **33** |
+| Contributions in the last 12 months | **426** |
+| — commits | **85** |
+| — pull requests | **13** |
+| — code reviews | **0** |
+| — issues | **2** |
 
 ## By the Numbers
 
@@ -91,11 +106,11 @@
 Automatically calculated from GitHub's language data for my current public, non-fork, non-archived repositories.
 
 <p>
-  <img src="https://img.shields.io/badge/Python-27.2%25-8B949E?style=flat-square&amp;logo=python" alt="Python 27.2%" />
-  <img src="https://img.shields.io/badge/Kotlin-25.4%25-8B949E?style=flat-square&amp;logo=kotlin" alt="Kotlin 25.4%" />
-  <img src="https://img.shields.io/badge/C%23-14.4%25-8B949E?style=flat-square&amp;logo=csharp" alt="C# 14.4%" />
-  <img src="https://img.shields.io/badge/HTML-13.8%25-8B949E?style=flat-square&amp;logo=html5" alt="HTML 13.8%" />
-  <img src="https://img.shields.io/badge/TypeScript-11.3%25-8B949E?style=flat-square&amp;logo=typescript" alt="TypeScript 11.3%" />
+  <img src="https://img.shields.io/badge/Python-27.2%25-3572A5?style=flat-square&amp;logo=python" alt="Python 27.2%" />
+  <img src="https://img.shields.io/badge/Kotlin-25.4%25-A97BFF?style=flat-square&amp;logo=kotlin" alt="Kotlin 25.4%" />
+  <img src="https://img.shields.io/badge/C%23-14.4%25-7355DD?style=flat-square&amp;logo=csharp" alt="C# 14.4%" />
+  <img src="https://img.shields.io/badge/HTML-13.8%25-E34C26?style=flat-square&amp;logo=html5" alt="HTML 13.8%" />
+  <img src="https://img.shields.io/badge/TypeScript-11.3%25-3178C6?style=flat-square&amp;logo=typescript" alt="TypeScript 11.3%" />
 </p>
 
 ```text
@@ -169,5 +184,5 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 ---
 
 <div align="center">
-  <sub>Updated automatically · Oct 12, 2026</sub>
+  <sub>Updated automatically · Oct 13, 2026</sub>
 </div>
