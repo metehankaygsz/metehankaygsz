@@ -25,7 +25,7 @@
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/dashline"><strong>dashline</strong></a><br />
         A minimal Android launcher for car head units — clock, weather, media controls and app shortcuts. Works down to Android 4.4, no Google Play Services required.<br />
-        <sub>Kotlin · ★ 28 · ⑂ 3</sub>
+        <sub>Kotlin · ★ 29 · ⑂ 3</sub>
       </td>
       <td width="50%" valign="top">
         <a href="https://github.com/metehankaygsz/bcm94360cd-linux"><strong>bcm94360cd-linux</strong></a><br />
@@ -61,10 +61,10 @@
 | Repository | My contributions | Stars |
 | --- | --- | ---: |
 | [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs · 12 commits | ★ 1 |
-| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,297 |
-| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 928 |
+| [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,299 |
+| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 929 |
+| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 366 |
 | [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 338 |
-| [410979729/scope-recall-hermes](https://github.com/410979729/scope-recall-hermes) | 1 pull request | ★ 338 |
 
 ## Contribution Graph
 
@@ -83,7 +83,7 @@
 | Public repositories | **16** |
 | Original public projects | **10** |
 | Followers | **12** |
-| Stars on original repositories | **34** |
+| Stars on original repositories | **35** |
 | Contributions in the last 12 months | **434** |
 | — commits | **85** |
 | — pull requests | **13** |
@@ -184,5 +184,5 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 ---
 
 <div align="center">
-  <sub>Updated automatically · Oct 15, 2026</sub>
+  <sub>Updated automatically · Oct 16, 2026</sub>
 </div>
