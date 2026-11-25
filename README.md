@@ -62,7 +62,7 @@
 | --- | --- | ---: |
 | [MISDataGit/MISdata](https://github.com/MISDataGit/MISdata) | 5 merged PRs · 12 commits | ★ 1 |
 | [posit-dev/positron](https://github.com/posit-dev/positron) | 2 pull requests · 1 commit | ★ 4,358 |
-| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 944 |
+| [ubuntu/app-center](https://github.com/ubuntu/app-center) | 1 pull request | ★ 945 |
 | [posit-dev/ark](https://github.com/posit-dev/ark) | 1 pull request | ★ 342 |
 
 ## Contribution Graph
@@ -98,7 +98,7 @@
 | Net lines standing | **32,846** |
 | Code across public repositories | **899 KB** |
 | Most-used license | **GPL-3.0** (1 repositories) |
-| Longest-lived project | **reboottopayloadswitch** (6.5 years) |
+| Longest-lived project | **reboottopayloadswitch** (6.6 years) |
 
 ## Languages
 
@@ -180,10 +180,9 @@ C           █░░░░░░░░░░░░░░░░░░░░░�
 
 - **Nov 10, 2026:** Starred [pookjw/HermesEnabler](https://github.com/pookjw/HermesEnabler)
 - **Oct 29, 2026:** Starred [RxNaison/Epson-Waste-Reset](https://github.com/RxNaison/Epson-Waste-Reset)
-- **Oct 24, 2026:** Pushed updates to [metehankaygsz/dashline](https://github.com/metehankaygsz/dashline)
 
 ---
 
 <div align="center">
-  <sub>Updated automatically · Nov 24, 2026</sub>
+  <sub>Updated automatically · Nov 25, 2026</sub>
 </div>
